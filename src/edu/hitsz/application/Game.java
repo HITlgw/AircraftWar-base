@@ -34,6 +34,7 @@ public class Game extends JPanel {
      * 时间间隔(ms)，控制刷新频率
      */
     private int timeInterval = 40;
+    //调试时改变的刷新频率
     //private int timeInterval = 600;
     private final HeroAircraft heroAircraft;
     private final List<AbstractAircraft> enemyAircrafts;
@@ -55,14 +56,15 @@ public class Game extends JPanel {
 
 
     public Game() {
-        heroAircraft = new HeroAircraft(
-                Main.WINDOW_WIDTH / 2,
-                Main.WINDOW_HEIGHT - ImageManager.HERO_IMAGE.getHeight() ,
-                0, 0, 100);
-
+//        heroAircraft = new HeroAircraft(
+//                Main.WINDOW_WIDTH / 2,
+//                Main.WINDOW_HEIGHT - ImageManager.HERO_IMAGE.getHeight() ,
+//                0, 0, 100);
+        heroAircraft=HeroAircraft.getinstance();
         enemyAircrafts = new LinkedList<>();
         heroBullets = new LinkedList<>();
         enemyBullets = new LinkedList<>();
+        // V1:新增supply列表
         abstractSupplies = new LinkedList<>() ;
 
 
@@ -93,7 +95,7 @@ public class Game extends JPanel {
             if (timeCountAndNewCycleJudge()) {
                 System.out.println(time);
                 // 新敌机产生
-                //优先产生精英敌机
+                // V1:优先产生精英敌机
                 if(enemyAircrafts.size() < enemyMaxNumber+1 && time%6000==1200){
                     enemyAircrafts.add(new EliteEnemy(
                             (int) ( Math.random() * (Main.WINDOW_WIDTH - ImageManager.MOB_ENEMY_IMAGE.getWidth()))*1,
@@ -113,9 +115,6 @@ public class Game extends JPanel {
                             30
                     ));
                 }
-                //
-
-
                 // 飞机射出子弹
                 shootAction();
             }
@@ -126,7 +125,7 @@ public class Game extends JPanel {
             // 飞机移动
             aircraftsMoveAction();
 
-            //
+            //  V1:补给道具移动
             suppliesMoveAction();
 
             // 撞击检测
@@ -173,11 +172,11 @@ public class Game extends JPanel {
 
     private void shootAction() {
         // TODO 敌机射击
+        // V1:敌机射击，只有精英敌机射击（是否改成全部敌机射击？Mob射击有重写）
         for(AbstractAircraft EnemyAircraft : enemyAircrafts){
             if(EnemyAircraft instanceof EliteEnemy){
                 enemyBullets.addAll(EnemyAircraft.shoot());
             }
-
         }
         // 英雄射击
         heroBullets.addAll(heroAircraft.shoot());
@@ -197,7 +196,7 @@ public class Game extends JPanel {
             enemyAircraft.forward();
         }
     }
-
+    //  V1:补给移动
     private void suppliesMoveAction() {
         for (AbstractSupply supply : abstractSupplies) {
             supply.forward();
@@ -213,6 +212,7 @@ public class Game extends JPanel {
      */
     private void crashCheckAction() {
         // TODO 敌机子弹攻击英雄
+        // V1:敌机子弹和英雄碰撞检测
         for(AbstractBullet bullet : enemyBullets)
         {
             if(bullet.notValid()){
@@ -242,6 +242,7 @@ public class Game extends JPanel {
                     bullet.vanish();
                     if (enemyAircraft.notValid()) {
                         // TODO 获得分数，产生道具补给
+                        // V1:精英敌机消失时产生道具，可修改道具掉落概率
                         if(enemyAircraft instanceof EliteEnemy)
                         {
                             int x = enemyAircraft.getLocationX();
@@ -276,6 +277,7 @@ public class Game extends JPanel {
             }
         }
         // TODO 我方获得道具，道具生效
+        // V1:道具和英雄机碰撞检测
         for(AbstractSupply supply : abstractSupplies)
         {
             if(supply.notValid())
@@ -295,6 +297,7 @@ public class Game extends JPanel {
      * 1. 删除无效的子弹
      * 2. 删除无效的敌机
      * 3. 检查英雄机生存
+     * 4. 删除失效补给（V1）
      * <p>
      * 无效的原因可能是撞击或者飞出边界
      */
@@ -302,6 +305,7 @@ public class Game extends JPanel {
         enemyBullets.removeIf(AbstractFlyingObject::notValid);
         heroBullets.removeIf(AbstractFlyingObject::notValid);
         enemyAircrafts.removeIf(AbstractFlyingObject::notValid);
+        // V1:删除失效的补给
         abstractSupplies.removeIf(AbstractFlyingObject::notValid);
     }
 
@@ -332,6 +336,7 @@ public class Game extends JPanel {
         // 这样子弹显示在飞机的下层
         paintImageWithPositionRevised(g, enemyBullets);
         paintImageWithPositionRevised(g, heroBullets);
+        // V1:绘制补给
         paintImageWithPositionRevised(g, abstractSupplies);
         paintImageWithPositionRevised(g, enemyAircrafts);
 

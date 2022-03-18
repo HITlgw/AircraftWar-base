@@ -5,7 +5,7 @@ import edu.hitsz.application.Game;
 
 public class HPSupply extends AbstractSupply{
     private int addHP;
-    //默认addHP=100
+    //默认addHP=50
     public HPSupply(int locationX, int locationY, int speedX, int speedY)
     {
         super(locationX, locationY, speedX, speedY);

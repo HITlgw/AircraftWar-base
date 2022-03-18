@@ -1,7 +1,6 @@
 package edu.hitsz.supply;
 
 import edu.hitsz.aircraft.HeroAircraft;
-import edu.hitsz.application.Game;
 
 /**
  * *
@@ -13,19 +12,19 @@ import edu.hitsz.application.Game;
  * }
  */
 public class BulletSupply extends AbstractSupply{
-    private int AddBullet;
+    private int addBullet;
     //默认Addbullet=1
     public BulletSupply(int locationX, int locationY, int speedX, int speedY){
         super(locationX,locationY,speedX,speedY);
-        this.AddBullet=1;
+        this.addBullet =1;
     }
     //设置Addbullet
-    public BulletSupply(int locationX, int locationY, int speedX, int speedY,int AddBullet){
+    public BulletSupply(int locationX, int locationY, int speedX, int speedY,int addBullet){
         super(locationX,locationY,speedX,speedY);
-        this.AddBullet=AddBullet;
+        this.addBullet =addBullet;
     }
     public void getSupply(HeroAircraft hero){
-        hero.addBullet(AddBullet);
+        hero.addBullet(addBullet);
         System.out.println("FireSupply active!");
     }
 }

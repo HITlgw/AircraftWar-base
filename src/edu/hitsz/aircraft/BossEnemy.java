@@ -1,4 +1,9 @@
 package edu.hitsz.aircraft;
+/**
+ * V1:新建Boss敌机
+ * 发射操作未实现
+ *
+ */
 
 import edu.hitsz.bullet.AbstractBullet;
 

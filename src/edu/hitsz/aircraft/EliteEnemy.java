@@ -1,4 +1,8 @@
 package edu.hitsz.aircraft;
+/**
+ * V1:新增精英敌机
+ *
+ */
 
 import edu.hitsz.application.Main;
 import edu.hitsz.bullet.AbstractBullet;
@@ -9,7 +13,7 @@ import java.util.LinkedList;
 import java.util.List;
 
 public class EliteEnemy extends AbstractAircraft{
-    private int shootNum = 1;
+//    private int shootNum = 1;
     private int power = 30;
     private int direction = 1;
     public EliteEnemy(int locationX, int locationY, int speedX, int speedY, int hp) {

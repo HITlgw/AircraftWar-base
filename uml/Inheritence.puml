@@ -12,9 +12,9 @@ abstract class AbstractFlyingObject
     # height:int
     # isValid:boolean
 
-    + FlyingObject(int locationX, int locationY, int speedX, int speedY):void
+    + AbstractFlyingObject(int locationX, int locationY, int speedX, int speedY)
     + forward():void
-    + crash(FlyingObject flyingObject):boolean
+    + crash(AbstractFlyingObject flyingObject):boolean
     + setLocation(double locationX, double locationY):void
     + getLocationX():int
     + getLocationY():int
@@ -29,7 +29,7 @@ abstract class AbstractAircraft
 {
 	# maxHp:int
     # hp:int
-    + AbstractAircraft(int locationX, int locationY, int speedX, int speedY, int hp):void
+    + AbstractAircraft(int locationX, int locationY, int speedX, int speedY, int hp)
     + decreaseHp(int decrease):void
     + getHp():int
     + {abstract} shoot():List<Bullet>
@@ -38,15 +38,16 @@ abstract class AbstractAircraft
 abstract class AbstractBullet
 {
     - power:int
-    + AbstractBullet(int locationX, int locationY, int speedX, int speedY, int power):void
+    + AbstractBullet(int locationX, int locationY, int speedX, int speedY, int power)
     + forward():void
 	+ getPower():int
 }
 
 abstract class AbstractSupply
 {
-    + AbstractSupply(int locationX, int locationY, int speedX, int speedY, int power):void
-    + getSupply(HeroAircraft Hero)
+    + AbstractSupply(int locationX, int locationY, int speedX, int speedY, int power)
+    + {abstract} getSupply(HeroAircraft Hero)
+    + forward()
 }
 
 AbstractFlyingObject <|-- AbstractAircraft
@@ -69,33 +70,33 @@ class HeroAircraft {
     - shootNum:int
     - power:int
     - direction:int
-    + HeroAircraft(int locationX, int locationY, int speedX, int speedY, int hp):void
+    + HeroAircraft(int locationX, int locationY, int speedX, int speedY, int hp)
     + forward():void
     + shoot():List<Bullet>
-    + addBullet(int AddBullet)
     + addHP(int AddHP)
+    + addBullet(int AddBullet)
 }
 
 class MobEnemy {
-    + MobEnemy(int locationX, int locationY, int speedX, int speedY, int hp):void
+    + MobEnemy(int locationX, int locationY, int speedX, int speedY, int hp)
     + forward():void
-    + shoot():List<Bullet>
+    + shoot():List<AbstractBullet>
 }
 
 class EliteEnemy {
-    - shootNum:int
     - power:int
-    + EliteEnemy(int locationX, int locationY, int speedX, int speedY, int hp):void
+    + EliteEnemy(int locationX, int locationY, int speedX, int speedY, int hp)
     + forward():void
-    + shoot():List<Bullet>
+    + shoot():List<AbstractBullet>
 }
 
 class BossEnemy {
     - shootNum:int
     - power:int
-    + BossEnemy(int locationX, int locationY, int speedX, int speedY, int hp):void
+    - direction:int
+    + BossEnemy(int locationX, int locationY, int speedX, int speedY, int hp)
     + forward():void
-    + shoot():List<Bullet>
+    + shoot():List<AbstractBullet>
 }
 
 class HeroBullet {
@@ -109,7 +110,7 @@ class EnemyBullet {
 }
 
 class HPSupply{
-    - int AddHP
+    - int addHP
     + HPSupply(int locationX, int locationY,
      int speedX, int speedY, int addHP)
     + HPSupply(int locationX, int locationY,
@@ -118,11 +119,11 @@ class HPSupply{
 }
 
 class BulletSupply{
-    - int AddBullet
+    - int addBullet
     + BulletSupply(int locationX, int locationY,
      int speedX, int speedY)
     + BulletSupply(int locationX, int locationY,
-          int speedX, int speedY, int AddBullet)
+          int speedX, int speedY, int addBullet)
     + getSupply(HeroAircraft Hero):void
 }
 
