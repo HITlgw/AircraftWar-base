@@ -6,6 +6,7 @@ package edu.hitsz.aircraft;
  */
 
 import edu.hitsz.bullet.AbstractBullet;
+import edu.hitsz.supply.AbstractSupply;
 
 import java.util.List;
 
@@ -20,6 +21,11 @@ public class BossEnemy extends AbstractAircraft {
 
     @Override
     public List<AbstractBullet> shoot() {
+        return null;
+    }
+    //V2:将产生Supply移入BossEnemy
+    @Override
+    public AbstractSupply generateSupply() {
         return null;
     }
 }

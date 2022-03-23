@@ -1,12 +1,11 @@
 package edu.hitsz.application;
 
+import Factory.EliteAircraftFactory;
+import Factory.MobAircraftFactory;
 import edu.hitsz.aircraft.*;
 import edu.hitsz.bullet.AbstractBullet;
 import edu.hitsz.basic.AbstractFlyingObject;
 import edu.hitsz.supply.AbstractSupply;
-import edu.hitsz.supply.BombSupply;
-import edu.hitsz.supply.BulletSupply;
-import edu.hitsz.supply.HPSupply;
 import org.apache.commons.lang3.concurrent.BasicThreadFactory;
 
 import javax.swing.*;
@@ -54,13 +53,13 @@ public class Game extends JPanel {
     private int cycleDuration = 600;
     private int cycleTime = 0;
 
-
     public Game() {
-        heroAircraft = new HeroAircraft(
-                Main.WINDOW_WIDTH / 2,
-                Main.WINDOW_HEIGHT - ImageManager.HERO_IMAGE.getHeight() ,
-                0, 0, 100);
-//        heroAircraft=HeroAircraft.getinstance();
+//        heroAircraft = new HeroAircraft(
+//                Main.WINDOW_WIDTH / 2,
+//                Main.WINDOW_HEIGHT - ImageManager.HERO_IMAGE.getHeight() ,
+//                0, 0, 100);
+    //V2:单例模式修改
+        heroAircraft=HeroAircraft.getinstance();
         enemyAircrafts = new LinkedList<>();
         heroBullets = new LinkedList<>();
         enemyBullets = new LinkedList<>();
@@ -105,25 +104,13 @@ public class Game extends JPanel {
 //                            30
 //                    ));
 //                }
-
+                //V2:使用工厂重构，隐藏创建敌机细节
                 if (enemyAircrafts.size() < enemyMaxNumber) {
                     if(Math.random()>0.2){
-                        enemyAircrafts.add(new MobEnemy(
-                                (int) ( Math.random() * (Main.WINDOW_WIDTH - ImageManager.MOB_ENEMY_IMAGE.getWidth()))*1,
-                                (int) (Math.random() * Main.WINDOW_HEIGHT * 0.2)*1,
-                                0,
-                                10,
-                                30
-                        ));
+                        enemyAircrafts.add(new MobAircraftFactory().createEnemyAircraft());
                     }
                     else{
-                        enemyAircrafts.add(new EliteEnemy(
-                            (int) ( Math.random() * (Main.WINDOW_WIDTH - ImageManager.MOB_ENEMY_IMAGE.getWidth()))*1,
-                            (int) (Math.random() * Main.WINDOW_HEIGHT * 0.2)*1,
-                            0,
-                            10,
-                            30
-                    ));
+                        enemyAircrafts.add(new EliteAircraftFactory().createEnemyAircraft());
                     }
                 }
                 // 飞机射出子弹
@@ -254,29 +241,34 @@ public class Game extends JPanel {
                     if (enemyAircraft.notValid()) {
                         // TODO 获得分数，产生道具补给
                         // V1:精英敌机消失时产生道具，可修改道具掉落概率
-                        if(enemyAircraft instanceof EliteEnemy)
-                        {
-                            int x = enemyAircraft.getLocationX();
-                            int y = enemyAircraft.getLocationY();
-                            //产生道具概率
-                            if(Math.random()>=0)
-                            {
-                                double typenum = Math.random();
-                                if(typenum<0.4){
-                                    AbstractSupply hpSupply = new HPSupply(x,y,0,10);
-                                    abstractSupplies.add(hpSupply);
-                                }
-                                else if(typenum<0.8){
-                                    AbstractSupply bulletSupply = new BulletSupply(x,y,0,10);
-                                    abstractSupplies.add(bulletSupply);
-                                }
-                                else{
-                                    AbstractSupply bombSupply = new BombSupply(x,y,0,10);
-                                    abstractSupplies.add(bombSupply);
-                                }
-                            }
-
-                        }
+//                        if(enemyAircraft instanceof EliteEnemy)
+//                        {
+//                            int x = enemyAircraft.getLocationX();
+//                            int y = enemyAircraft.getLocationY();
+//                            //产生道具概率
+//                            if(Math.random()>=0)
+//                            {
+//                                //V2:使用Supply工厂方法
+//                                double typenum = Math.random();
+//                                if(typenum<0.4){
+//                                    AbstractSupply hpSupply = new HPSupply(x,y,0,10);
+//                                    abstractSupplies.add(hpSupply);
+//                                }
+//                                else if(typenum<0.8){
+//                                    AbstractSupply bulletSupply = new BulletSupply(x,y,0,10);
+//                                    abstractSupplies.add(bulletSupply);
+//                                }
+//                                else{
+//                                    AbstractSupply bombSupply = new BombSupply(x,y,0,10);
+//                                    abstractSupplies.add(bombSupply);
+//                                }
+//                            }
+//
+//
+//
+//                        }
+                        //V2:使用敌机自身的generateSupply方法创建道具
+                        abstractSupplies.add(enemyAircraft.generateSupply());
                         score += 10;
                     }
                 }

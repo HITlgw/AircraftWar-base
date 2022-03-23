@@ -1,0 +1,68 @@
+@startuml
+'https://plantuml.com/class-diagram
+class Game{
+}
+
+Game ...> SupplyFactory
+Game ...> AbstractSupply
+Interface SupplyFactory{
+    + createSupply():AbstractSupply
+}
+
+abstract class AbstractSupply
+{
+    + AbstractSupply(int locationX, int locationY, int speedX, int speedY, int power)
+    + {abstract} getSupply(HeroAircraft Hero):void
+    + forward():void
+}
+SupplyFactory ...> AbstractSupply
+
+class HPSupplyFactory{
+    + createSupply():AbstractSupply
+}
+
+class BulletSupplyFactory{
+    + createSupply():AbstractSupply
+}
+
+class BombSupplyFactory{
+    + createSupply():AbstractSupply
+}
+
+SupplyFactory <|... HPSupplyFactory
+SupplyFactory <|... BulletSupplyFactory
+SupplyFactory <|... BombSupplyFactory
+
+HPSupplyFactory ...> HPSupply
+BulletSupplyFactory ...> BulletSupply
+BombSupplyFactory ...> BombSupply
+
+AbstractSupply <|-- HPSupply
+AbstractSupply <|-- BulletSupply
+AbstractSupply <|-- BombSupply
+
+class HPSupply{
+    - int addHP
+    + HPSupply(int locationX, int locationY,
+     int speedX, int speedY, int addHP)
+    + HPSupply(int locationX, int locationY,
+     int speedX, int speedY)
+    + getSupply(HeroAircraft Hero):void
+}
+
+class BulletSupply{
+    - int addBullet
+    + BulletSupply(int locationX, int locationY,
+     int speedX, int speedY)
+    + BulletSupply(int locationX, int locationY,
+          int speedX, int speedY, int addBullet)
+    + getSupply(HeroAircraft Hero):void
+}
+
+class BombSupply{
+    + BombSupply(int locationX, int locationY,
+     int speedX, int speedY)
+    + getSupply(HeroAircraft Hero):void
+}
+
+@enduml
