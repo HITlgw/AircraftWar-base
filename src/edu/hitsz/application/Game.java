@@ -268,7 +268,8 @@ public class Game extends JPanel {
 //
 //                        }
                         //V2:使用敌机自身的generateSupply方法创建道具
-                        abstractSupplies.add(enemyAircraft.generateSupply());
+                        AbstractSupply supply=enemyAircraft.generateSupply();
+                        if(supply!=null){abstractSupplies.add(enemyAircraft.generateSupply());}
                         score += 10;
                     }
                 }
