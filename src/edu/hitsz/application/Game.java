@@ -56,11 +56,11 @@ public class Game extends JPanel {
 
 
     public Game() {
-//        heroAircraft = new HeroAircraft(
-//                Main.WINDOW_WIDTH / 2,
-//                Main.WINDOW_HEIGHT - ImageManager.HERO_IMAGE.getHeight() ,
-//                0, 0, 100);
-        heroAircraft=HeroAircraft.getinstance();
+        heroAircraft = new HeroAircraft(
+                Main.WINDOW_WIDTH / 2,
+                Main.WINDOW_HEIGHT - ImageManager.HERO_IMAGE.getHeight() ,
+                0, 0, 100);
+//        heroAircraft=HeroAircraft.getinstance();
         enemyAircrafts = new LinkedList<>();
         heroBullets = new LinkedList<>();
         enemyBullets = new LinkedList<>();
@@ -95,25 +95,36 @@ public class Game extends JPanel {
             if (timeCountAndNewCycleJudge()) {
                 System.out.println(time);
                 // 新敌机产生
-                // V1:优先产生精英敌机
-                if(enemyAircrafts.size() < enemyMaxNumber+1 && time%6000==1200){
-                    enemyAircrafts.add(new EliteEnemy(
-                            (int) ( Math.random() * (Main.WINDOW_WIDTH - ImageManager.MOB_ENEMY_IMAGE.getWidth()))*1,
-                            (int) (Math.random() * Main.WINDOW_HEIGHT * 0.2)*1,
-                            0,
-                            10,
-                            30
-                    ));
-                }
+                // V1:优先产生精英敌机(理解错误)
+//                if(enemyAircrafts.size() < enemyMaxNumber+1 && time%6000==1200){
+//                    enemyAircrafts.add(new EliteEnemy(
+//                            (int) ( Math.random() * (Main.WINDOW_WIDTH - ImageManager.MOB_ENEMY_IMAGE.getWidth()))*1,
+//                            (int) (Math.random() * Main.WINDOW_HEIGHT * 0.2)*1,
+//                            0,
+//                            10,
+//                            30
+//                    ));
+//                }
 
                 if (enemyAircrafts.size() < enemyMaxNumber) {
-                    enemyAircrafts.add(new MobEnemy(
+                    if(Math.random()>0.2){
+                        enemyAircrafts.add(new MobEnemy(
+                                (int) ( Math.random() * (Main.WINDOW_WIDTH - ImageManager.MOB_ENEMY_IMAGE.getWidth()))*1,
+                                (int) (Math.random() * Main.WINDOW_HEIGHT * 0.2)*1,
+                                0,
+                                10,
+                                30
+                        ));
+                    }
+                    else{
+                        enemyAircrafts.add(new EliteEnemy(
                             (int) ( Math.random() * (Main.WINDOW_WIDTH - ImageManager.MOB_ENEMY_IMAGE.getWidth()))*1,
                             (int) (Math.random() * Main.WINDOW_HEIGHT * 0.2)*1,
                             0,
                             10,
                             30
                     ));
+                    }
                 }
                 // 飞机射出子弹
                 shootAction();

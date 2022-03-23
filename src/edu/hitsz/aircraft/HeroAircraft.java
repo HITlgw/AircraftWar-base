@@ -31,7 +31,7 @@ public class HeroAircraft extends AbstractAircraft {
      * 子弹射击方向 (向上发射：1，向下发射：-1)
      */
     private int direction = -1;
-    private static HeroAircraft hero;
+//    private static HeroAircraft hero;
 
     /**
      * @param locationX 英雄机位置x坐标
@@ -40,7 +40,7 @@ public class HeroAircraft extends AbstractAircraft {
      * @param speedY 英雄机射出的子弹的基准速度（英雄机无特定速度）
      * @param hp    初始生命值
      */
-    private HeroAircraft(int locationX, int locationY, int speedX, int speedY, int hp) {
+    public HeroAircraft(int locationX, int locationY, int speedX, int speedY, int hp) {
         super(locationX, locationY, speedX, speedY, hp);
     }
 
@@ -78,17 +78,17 @@ public class HeroAircraft extends AbstractAircraft {
         this.shootNum+=AddBullet;
     }
 
-    public static HeroAircraft getinstance()
-    {
-        if(hero==null)
-        {
-            hero=new HeroAircraft(
-                    Main.WINDOW_WIDTH / 2,
-                    Main.WINDOW_HEIGHT - ImageManager.HERO_IMAGE.getHeight() ,
-                    0, 0, 100);
-        }
-        return hero;
-    }
+//    public static HeroAircraft getinstance()
+//    {
+//        if(hero==null)
+//        {
+//            hero=new HeroAircraft(
+//                    Main.WINDOW_WIDTH / 2,
+//                    Main.WINDOW_HEIGHT - ImageManager.HERO_IMAGE.getHeight() ,
+//                    0, 0, 100);
+//        }
+//        return hero;
+//    }
 
 
 }

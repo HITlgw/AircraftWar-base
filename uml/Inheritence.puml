@@ -46,8 +46,8 @@ abstract class AbstractBullet
 abstract class AbstractSupply
 {
     + AbstractSupply(int locationX, int locationY, int speedX, int speedY, int power)
-    + {abstract} getSupply(HeroAircraft Hero)
-    + forward()
+    + {abstract} getSupply(HeroAircraft Hero):void
+    + forward():void
 }
 
 AbstractFlyingObject <|-- AbstractAircraft
@@ -73,8 +73,8 @@ class HeroAircraft {
     + HeroAircraft(int locationX, int locationY, int speedX, int speedY, int hp)
     + forward():void
     + shoot():List<Bullet>
-    + addHP(int AddHP)
-    + addBullet(int AddBullet)
+    + addHP(int AddHP):void
+    + addBullet(int AddBullet):void
 }
 
 class MobEnemy {
@@ -85,6 +85,7 @@ class MobEnemy {
 
 class EliteEnemy {
     - power:int
+    - direction:int
     + EliteEnemy(int locationX, int locationY, int speedX, int speedY, int hp)
     + forward():void
     + shoot():List<AbstractBullet>
@@ -95,7 +96,6 @@ class BossEnemy {
     - power:int
     - direction:int
     + BossEnemy(int locationX, int locationY, int speedX, int speedY, int hp)
-    + forward():void
     + shoot():List<AbstractBullet>
 }
 

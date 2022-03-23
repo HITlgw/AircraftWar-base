@@ -24,7 +24,7 @@ public class BulletSupply extends AbstractSupply{
         this.addBullet =addBullet;
     }
     public void getSupply(HeroAircraft hero){
-        hero.addBullet(addBullet);
+//        hero.addBullet(addBullet);
         System.out.println("FireSupply active!");
     }
 }
