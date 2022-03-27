@@ -1,13 +1,6 @@
 @startuml
 'https://plantuml.com/class-diagram
-class Game{
 
-
-}
-
-
-Game ...> EnemyAircraftFactory
-Game ...> AbstractAircraft
 
 Interface EnemyAircraftFactory{
     + createEnemyAircraft():AbstractAircraft
@@ -23,7 +16,7 @@ abstract class AbstractAircraft
     + {abstract} shoot():List<Bullet>
  }
 
-EnemyAircraftFactory ...> AbstractAircraft
+
 
 
 class MobAircraftFactory{
@@ -49,7 +42,7 @@ AbstractAircraft <|-- EliteEnemy
 AbstractAircraft <|-- BossEnemy
 
 
-class MobEnemy {
+class MobEnemy{
     + MobEnemy(int locationX, int locationY, int speedX, int speedY, int hp)
     + forward():void
     + shoot():List<AbstractBullet>

@@ -1,10 +1,10 @@
-package Factory;
+package edu.hitsz.Factory;
 import edu.hitsz.aircraft.AbstractAircraft;
 import edu.hitsz.aircraft.MobEnemy;
 import edu.hitsz.application.ImageManager;
 import edu.hitsz.application.Main;
 
-public class MobAircraftFactory implements EnemyAircraftFactory {
+public class MobEnemyFactory implements EnemyAircraftFactory {
     @Override
     public AbstractAircraft createEnemyAircraft() {
         return new MobEnemy(

@@ -11,7 +11,7 @@ class HeroAircraft {
     + forward():void
     + shoot():List<Bullet>
     + addHP(int AddHP):void
-    + addBullet(int AddBullet):void
+
 }
 
 

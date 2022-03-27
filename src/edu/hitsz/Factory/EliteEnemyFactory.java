@@ -1,11 +1,11 @@
-package Factory;
+package edu.hitsz.Factory;
 
 import edu.hitsz.aircraft.AbstractAircraft;
 import edu.hitsz.aircraft.EliteEnemy;
 import edu.hitsz.application.ImageManager;
 import edu.hitsz.application.Main;
 
-public class EliteAircraftFactory implements EnemyAircraftFactory {
+public class EliteEnemyFactory implements EnemyAircraftFactory {
     @Override
     public AbstractAircraft createEnemyAircraft() {
         return new EliteEnemy(

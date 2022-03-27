@@ -1,7 +1,7 @@
 package edu.hitsz.application;
 
-import Factory.EliteAircraftFactory;
-import Factory.MobAircraftFactory;
+import edu.hitsz.Factory.EliteEnemyFactory;
+import edu.hitsz.Factory.MobEnemyFactory;
 import edu.hitsz.aircraft.*;
 import edu.hitsz.bullet.AbstractBullet;
 import edu.hitsz.basic.AbstractFlyingObject;
@@ -42,7 +42,6 @@ public class Game extends JPanel {
     private final List<AbstractSupply> abstractSupplies;
 
     private int enemyMaxNumber = 5;
-
     private boolean gameOverFlag = false;
     private int score = 0;
     private int time = 0;
@@ -107,10 +106,10 @@ public class Game extends JPanel {
                 //V2:使用工厂重构，隐藏创建敌机细节
                 if (enemyAircrafts.size() < enemyMaxNumber) {
                     if(Math.random()>0.2){
-                        enemyAircrafts.add(new MobAircraftFactory().createEnemyAircraft());
+                        enemyAircrafts.add(new MobEnemyFactory().createEnemyAircraft());
                     }
                     else{
-                        enemyAircrafts.add(new EliteAircraftFactory().createEnemyAircraft());
+                        enemyAircrafts.add(new EliteEnemyFactory().createEnemyAircraft());
                     }
                 }
                 // 飞机射出子弹
@@ -374,6 +373,8 @@ public class Game extends JPanel {
         y = y + 20;
         g.drawString("LIFE:" + this.heroAircraft.getHp(), x, y);
     }
+
+
 
 
 }

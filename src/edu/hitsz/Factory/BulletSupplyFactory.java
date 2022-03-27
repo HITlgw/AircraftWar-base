@@ -1,4 +1,4 @@
-package Factory;
+package edu.hitsz.Factory;
 
 import edu.hitsz.supply.AbstractSupply;
 import edu.hitsz.supply.BulletSupply;

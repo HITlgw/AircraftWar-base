@@ -4,18 +4,13 @@ package edu.hitsz.aircraft;
  *
  */
 
-import Factory.BombSupplyFactory;
-import Factory.BulletSupplyFactory;
-import Factory.HPSupplyFactory;
-import Factory.SupplyFactory;
+import edu.hitsz.Factory.BombSupplyFactory;
+import edu.hitsz.Factory.BulletSupplyFactory;
+import edu.hitsz.Factory.HPSupplyFactory;
 import edu.hitsz.application.Main;
 import edu.hitsz.bullet.AbstractBullet;
 import edu.hitsz.bullet.EnemyBullet;
-import edu.hitsz.bullet.HeroBullet;
 import edu.hitsz.supply.AbstractSupply;
-import edu.hitsz.supply.BombSupply;
-import edu.hitsz.supply.BulletSupply;
-import edu.hitsz.supply.HPSupply;
 
 import java.util.LinkedList;
 import java.util.List;

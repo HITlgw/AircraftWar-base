@@ -1,8 +1,8 @@
-package Factory;
+package edu.hitsz.Factory;
 
 import edu.hitsz.aircraft.AbstractAircraft;
 
-public class BossAircraftFactory implements EnemyAircraftFactory {
+public class BossEnemyFactory implements EnemyAircraftFactory {
     @Override
     public AbstractAircraft createEnemyAircraft() {
         return null;
