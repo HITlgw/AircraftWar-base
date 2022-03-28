@@ -4,7 +4,7 @@
 Interface SupplyFactory{
     + createSupply():AbstractSupply
 }
-
+SupplyFactory..left.>AbstractSupply
 abstract class AbstractSupply
 {
     + AbstractSupply(int locationX, int locationY, int speedX, int speedY, int power)

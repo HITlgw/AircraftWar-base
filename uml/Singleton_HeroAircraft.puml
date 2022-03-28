@@ -13,6 +13,6 @@ class HeroAircraft {
     + addHP(int AddHP):void
 
 }
-
+HeroAircraft--->HeroAircraft
 
 @enduml

@@ -149,10 +149,12 @@ abstract class AbstractSupply
 SupplyFactory <|... HPSupplyFactory
 SupplyFactory <|... BulletSupplyFactory
 SupplyFactory <|... BombSupplyFactory
+SupplyFactory..left.>AbstractSupply
 
 HPSupplyFactory ...> HPSupply
 BulletSupplyFactory ...> BulletSupply
 BombSupplyFactory ...> BombSupply
+EnemyAircraftFactory..left.>AbstractAircraft
 
 class HPSupplyFactory{
     + createSupply():AbstractSupply
@@ -178,7 +180,9 @@ class BossAircraftFactory{
 EnemyAircraftFactory <|... MobAircraftFactory
 EnemyAircraftFactory <|... EliteAircraftFactory
 EnemyAircraftFactory <|... BossAircraftFactory
-
+Interface EnemyAircraftFactory{
+    + createEnemyAircraft():AbstractAircraft
+}
 MobAircraftFactory ...> MobEnemy
 EliteAircraftFactory ...> EliteEnemy
 BossAircraftFactory ...> BossEnemy

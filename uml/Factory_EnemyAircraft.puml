@@ -5,7 +5,7 @@
 Interface EnemyAircraftFactory{
     + createEnemyAircraft():AbstractAircraft
 }
-
+EnemyAircraftFactory..left.>AbstractAircraft
 abstract class AbstractAircraft
 {
 	# maxHp:int
