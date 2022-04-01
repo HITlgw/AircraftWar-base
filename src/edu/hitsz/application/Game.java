@@ -170,9 +170,9 @@ public class Game extends JPanel {
     private void shootAction() {
         // TODO 敌机射击
         // V1:敌机射击，只有精英敌机射击（是否改成全部敌机射击？Mob射击有重写）
-        for(AbstractAircraft EnemyAircraft : enemyAircrafts){
-            if(EnemyAircraft instanceof EliteEnemy){
-                enemyBullets.addAll(EnemyAircraft.shoot());
+        for(AbstractAircraft enemyAircraft : enemyAircrafts){
+            if(enemyAircraft instanceof EliteEnemy){
+                enemyBullets.addAll(enemyAircraft.shoot());
             }
         }
         // 英雄射击

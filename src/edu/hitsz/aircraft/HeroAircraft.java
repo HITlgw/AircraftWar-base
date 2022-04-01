@@ -78,12 +78,14 @@ public class HeroAircraft extends AbstractAircraft {
     }
 
     // V1:增加加血和加子弹操作（实现补给）
-    public void addHP(int addHP){
-        this.hp+=addHP;
-        if(this.hp>maxHp)this.hp=maxHp;
+    public void addHp(int addHp){
+        this.hp+=addHp;
+        if(this.hp>maxHp){
+            this.hp=maxHp;
+        }
     }
-    public void addBullet(int AddBullet){
-        this.shootNum+=AddBullet;
+    public void addBullet(int addBullet){
+        this.shootNum+=addBullet;
     }
 
     //饿汉式

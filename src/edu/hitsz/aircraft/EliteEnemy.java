@@ -22,6 +22,7 @@ public class EliteEnemy extends AbstractAircraft{
     public EliteEnemy(int locationX, int locationY, int speedX, int speedY, int hp) {
         super(locationX, locationY, speedX, speedY, hp);
     }
+
     @Override
     public List<AbstractBullet> shoot() {
         List<AbstractBullet> res = new LinkedList<>();

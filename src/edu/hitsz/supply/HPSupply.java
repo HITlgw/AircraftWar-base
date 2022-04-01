@@ -1,24 +1,24 @@
 package edu.hitsz.supply;
 
 import edu.hitsz.aircraft.HeroAircraft;
-import edu.hitsz.application.Game;
 
 public class HPSupply extends AbstractSupply{
-    private int addHP;
+    private int addHp;
     //默认addHP=50
     public HPSupply(int locationX, int locationY, int speedX, int speedY)
     {
         super(locationX, locationY, speedX, speedY);
-        this.addHP=50;
+        this.addHp =50;
     }
     //重新设置的addHP
-    public HPSupply(int locationX, int locationY, int speedX, int speedY,int addHP)
+    public HPSupply(int locationX, int locationY, int speedX, int speedY,int addHp)
     {
         super(locationX, locationY, speedX, speedY);
-        this.addHP=addHP;
+        this.addHp =addHp;
     }
+
     @Override
     public void getSupply(HeroAircraft hero){
-        hero.addHP(addHP);
+        hero.addHp(addHp);
     }
 }

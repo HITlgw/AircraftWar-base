@@ -23,6 +23,7 @@ public class BulletSupply extends AbstractSupply{
         super(locationX,locationY,speedX,speedY);
         this.addBullet =addBullet;
     }
+    @Override
     public void getSupply(HeroAircraft hero){
 //        hero.addBullet(addBullet);
         System.out.println("FireSupply active!");
