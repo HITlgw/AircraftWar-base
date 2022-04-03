@@ -12,6 +12,7 @@ import edu.hitsz.bullet.AbstractBullet;
 import edu.hitsz.bullet.EnemyBullet;
 import edu.hitsz.supply.AbstractSupply;
 
+import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -46,16 +47,18 @@ public class EliteEnemy extends AbstractAircraft{
 
     //V2:将产生Supply移入EliteEnemy
     @Override
-    public AbstractSupply generateSupply() {
+    public List<AbstractSupply> generateSupply() {
         double typenum = Math.random();
+        List<AbstractSupply> newSupplyList = new LinkedList<>();
         if(typenum<0.4){
-            return new HPSupplyFactory().createSupply(locationX,locationY,0,10);
+            newSupplyList.add(new HPSupplyFactory().createSupply(locationX,locationY,0,10));
         }
         else if(typenum<0.8){
-            return new BulletSupplyFactory().createSupply(locationX,locationY,0,10);
+            newSupplyList.add(new BulletSupplyFactory().createSupply(locationX,locationY,0,10));
         }
         else{
-            return new BombSupplyFactory().createSupply(locationX,locationY,0,10);
+            newSupplyList.add(new BombSupplyFactory().createSupply(locationX,locationY,0,10));
         }
+        return newSupplyList;
     }
 }

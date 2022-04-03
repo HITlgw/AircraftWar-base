@@ -35,7 +35,7 @@ public class MobEnemy extends AbstractAircraft {
     }
     //V2:将产生Supply移入MObEnemy
     @Override
-    public AbstractSupply generateSupply() {
+    public List<AbstractSupply> generateSupply() {
         return null;
     }
 

@@ -5,9 +5,15 @@ package edu.hitsz.aircraft;
  *
  */
 
+import edu.hitsz.Factory.BombSupplyFactory;
+import edu.hitsz.Factory.BulletSupplyFactory;
+import edu.hitsz.Factory.HPSupplyFactory;
 import edu.hitsz.bullet.AbstractBullet;
+import edu.hitsz.bullet.EnemyBullet;
 import edu.hitsz.supply.AbstractSupply;
+import edu.hitsz.supply.BulletSupply;
 
+import java.util.LinkedList;
 import java.util.List;
 
 public class BossEnemy extends AbstractAircraft {
@@ -21,11 +27,29 @@ public class BossEnemy extends AbstractAircraft {
 
     @Override
     public List<AbstractBullet> shoot() {
-        return null;
+        List<AbstractBullet> res = new LinkedList<>();
+        int x = this.getLocationX();
+        int y = this.getLocationY() + direction*2;
+        int speedX = 0;
+        int speedY = this.getSpeedY() + direction*5;
+        AbstractBullet abstractBullet1 = new EnemyBullet(x,y,speedX,speedY,power);
+        res.add(abstractBullet1);
+        AbstractBullet abstractBullet2 = new EnemyBullet(x+2,y,speedX+2,speedY,power);
+        res.add(abstractBullet2);
+        AbstractBullet abstractBullet3 = new EnemyBullet(x+2,y,speedX-2,speedY,power);
+        res.add(abstractBullet3);
+        return res;
     }
     //V2:将产生Supply移入BossEnemy
     @Override
-    public AbstractSupply generateSupply() {
-        return null;
+    public List<AbstractSupply> generateSupply() {
+        List<AbstractSupply> newSupplyList = new LinkedList<>();
+        newSupplyList.add(new HPSupplyFactory().createSupply(super.locationX+8,super.locationY,0,10));
+        newSupplyList.add(new BulletSupplyFactory().createSupply(super.locationX-8,super.locationY,0,10));
+        if(Math.random()>0.5)
+        {
+            newSupplyList.add(new BombSupplyFactory().createSupply(super.locationX,super.locationY+5,0,10));
+        }
+        return newSupplyList;
     }
 }

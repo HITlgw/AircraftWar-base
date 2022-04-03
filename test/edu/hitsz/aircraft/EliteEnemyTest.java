@@ -51,8 +51,9 @@ class EliteEnemyTest {
     @ValueSource(ints={1,2,3})
     void generateSupply(int time) {
         EliteEnemy elite = (EliteEnemy) new EliteEnemyFactory().createEnemyAircraft();
-        AbstractSupply supply = elite.generateSupply();
-        assertNotNull(supply);
+        List<AbstractSupply> supplyList = elite.generateSupply();
+        assertNotNull(supplyList);
+        AbstractSupply supply = supplyList.get(0);
         if(!(supply instanceof HPSupply))
         {
             System.out.println("第"+time+"次不是HP道具,pass!");

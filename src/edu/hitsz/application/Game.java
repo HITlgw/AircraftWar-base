@@ -1,5 +1,6 @@
 package edu.hitsz.application;
 
+import edu.hitsz.Factory.BossEnemyFactory;
 import edu.hitsz.Factory.EliteEnemyFactory;
 import edu.hitsz.Factory.MobEnemyFactory;
 import edu.hitsz.aircraft.*;
@@ -51,6 +52,8 @@ public class Game extends JPanel {
      */
     private int cycleDuration = 600;
     private int cycleTime = 0;
+    //V4:增加变量记录是否存在boss敌机
+    private boolean existBoss = false;
 
     public Game() {
 //        heroAircraft = new HeroAircraft(
@@ -112,6 +115,12 @@ public class Game extends JPanel {
                         enemyAircrafts.add(new EliteEnemyFactory().createEnemyAircraft());
                     }
                 }
+                //V4:增加boss敌机
+                if(this.score % 200>=180 && existBoss==false)
+                {
+                    enemyAircrafts.add(new BossEnemyFactory().createEnemyAircraft());
+                    existBoss=true;
+                }
                 // 飞机射出子弹
                 shootAction();
             }
@@ -171,8 +180,10 @@ public class Game extends JPanel {
         // TODO 敌机射击
         // V1:敌机射击，只有精英敌机射击（是否改成全部敌机射击？Mob射击有重写）
         for(AbstractAircraft enemyAircraft : enemyAircrafts){
-            if(enemyAircraft instanceof EliteEnemy){
-                enemyBullets.addAll(enemyAircraft.shoot());
+            List<AbstractBullet> newlist = enemyAircraft.shoot();
+            if(newlist!=null)
+            {
+                enemyBullets.addAll(newlist);
             }
         }
         // 英雄射击
@@ -267,9 +278,14 @@ public class Game extends JPanel {
 //
 //                        }
                         //V2:使用敌机自身的generateSupply方法创建道具
-                        AbstractSupply supply=enemyAircraft.generateSupply();
-                        if(supply!=null){abstractSupplies.add(enemyAircraft.generateSupply());}
+                        List<AbstractSupply> newsupplyList=enemyAircraft.generateSupply();
+                        if(newsupplyList!=null){abstractSupplies.addAll(enemyAircraft.generateSupply());}
                         score += 10;
+                        //V3:boss机消失时需要重置existBoss
+                        if(enemyAircraft instanceof BossEnemy)
+                        {
+                            existBoss=false;
+                        }
                     }
                 }
                 // 英雄机 与 敌机 相撞，均损毁

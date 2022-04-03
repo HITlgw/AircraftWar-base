@@ -73,7 +73,7 @@ public class HeroAircraft extends AbstractAircraft {
     }
 
     @Override
-    public AbstractSupply generateSupply() {
+    public List<AbstractSupply> generateSupply() {
         return null;
     }
 
