@@ -1,14 +1,11 @@
 package edu.hitsz.supply;
 
-import edu.hitsz.Factory.EliteEnemyFactory;
-import edu.hitsz.Factory.HPSupplyFactory;
-import edu.hitsz.aircraft.EliteEnemy;
+import edu.hitsz.aircraftFactory.HPSupplyFactory;
 import edu.hitsz.aircraft.HeroAircraft;
 import edu.hitsz.application.Main;
 import org.junit.jupiter.api.*;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
-import org.junit.jupiter.params.provider.ValueSource;
 
 import static org.junit.jupiter.api.Assertions.*;
 import static org.junit.jupiter.api.Assumptions.assumeTrue;

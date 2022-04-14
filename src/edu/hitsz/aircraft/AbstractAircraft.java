@@ -1,5 +1,6 @@
 package edu.hitsz.aircraft;
 
+import edu.hitsz.ShootingType.AbstractShootingType;
 import edu.hitsz.bullet.AbstractBullet;
 import edu.hitsz.basic.AbstractFlyingObject;
 import edu.hitsz.supply.AbstractSupply;
@@ -18,6 +19,8 @@ public abstract class AbstractAircraft extends AbstractFlyingObject {
      */
     protected int maxHp;
     protected int hp;
+    //V4 策略模式设计方法
+    protected AbstractShootingType shootingType;
 
     public AbstractAircraft(int locationX, int locationY, int speedX, int speedY, int hp) {
         super(locationX, locationY, speedX, speedY);
@@ -46,6 +49,11 @@ public abstract class AbstractAircraft extends AbstractFlyingObject {
      */
     public abstract List<AbstractBullet> shoot();
     public abstract List<AbstractSupply> generateSupply();
+    //V4 设置射击方式
+    public void setShootingType(AbstractShootingType shootingType)
+    {
+        this.shootingType=shootingType;
+    }
 
 }
 

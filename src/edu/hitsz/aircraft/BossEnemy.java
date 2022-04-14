@@ -5,19 +5,17 @@ package edu.hitsz.aircraft;
  *
  */
 
-import edu.hitsz.Factory.BombSupplyFactory;
-import edu.hitsz.Factory.BulletSupplyFactory;
-import edu.hitsz.Factory.HPSupplyFactory;
+import edu.hitsz.aircraftFactory.BombSupplyFactory;
+import edu.hitsz.aircraftFactory.BulletSupplyFactory;
+import edu.hitsz.aircraftFactory.HPSupplyFactory;
 import edu.hitsz.bullet.AbstractBullet;
-import edu.hitsz.bullet.EnemyBullet;
 import edu.hitsz.supply.AbstractSupply;
-import edu.hitsz.supply.BulletSupply;
 
 import java.util.LinkedList;
 import java.util.List;
 
 public class BossEnemy extends AbstractAircraft {
-    private int shootNum = 2;
+    private int shootNum = 3;
     private int power = 50;
     private int direction = 1;
 
@@ -27,19 +25,22 @@ public class BossEnemy extends AbstractAircraft {
 
     @Override
     public List<AbstractBullet> shoot() {
-        List<AbstractBullet> res = new LinkedList<>();
-        int x = this.getLocationX();
-        int y = this.getLocationY() + direction*2;
-        int speedX = 0;
-        int speedY = this.getSpeedY() + direction*5;
-        AbstractBullet abstractBullet1 = new EnemyBullet(x,y,speedX,speedY,power);
-        res.add(abstractBullet1);
-        AbstractBullet abstractBullet2 = new EnemyBullet(x+2,y,speedX+2,speedY,power);
-        res.add(abstractBullet2);
-        AbstractBullet abstractBullet3 = new EnemyBullet(x+2,y,speedX-2,speedY,power);
-        res.add(abstractBullet3);
-        return res;
+        return this.shootingType.doShoot(1,power,shootNum,this.getLocationX(),this.getLocationY());
     }
+//    public List<AbstractBullet> shoot() {
+//        List<AbstractBullet> res = new LinkedList<>();
+//        int x = this.getLocationX();
+//        int y = this.getLocationY() + direction*2;
+//        int speedX = 0;
+//        int speedY = this.getSpeedY() + direction*5;
+//        AbstractBullet abstractBullet1 = new EnemyBullet(x,y,speedX,speedY,power);
+//        res.add(abstractBullet1);
+//        AbstractBullet abstractBullet2 = new EnemyBullet(x+2,y,speedX+2,speedY,power);
+//        res.add(abstractBullet2);
+//        AbstractBullet abstractBullet3 = new EnemyBullet(x+2,y,speedX-2,speedY,power);
+//        res.add(abstractBullet3);
+//        return res;
+//    }
     //V2:将产生Supply移入BossEnemy
     @Override
     public List<AbstractSupply> generateSupply() {

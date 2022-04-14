@@ -1,6 +1,6 @@
 package edu.hitsz.aircraft;
 
-import edu.hitsz.Factory.EliteEnemyFactory;
+import edu.hitsz.aircraftFactory.EliteEnemyFactory;
 import edu.hitsz.bullet.AbstractBullet;
 import edu.hitsz.bullet.EnemyBullet;
 import edu.hitsz.supply.AbstractSupply;

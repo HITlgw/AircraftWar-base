@@ -31,7 +31,8 @@ public class MobEnemy extends AbstractAircraft {
 
     @Override
     public List<AbstractBullet> shoot() {
-        return new LinkedList<>();
+//        return new LinkedList<>();
+        return null;
     }
     //V2:将产生Supply移入MObEnemy
     @Override

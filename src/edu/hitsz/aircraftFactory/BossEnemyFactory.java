@@ -1,5 +1,6 @@
-package edu.hitsz.Factory;
+package edu.hitsz.aircraftFactory;
 
+import edu.hitsz.ShootingType.DiffuseShootingType;
 import edu.hitsz.aircraft.AbstractAircraft;
 import edu.hitsz.aircraft.BossEnemy;
 import edu.hitsz.application.ImageManager;
@@ -10,7 +11,8 @@ public class BossEnemyFactory implements EnemyAircraftFactory {
     public AbstractAircraft createEnemyAircraft() {
         AbstractAircraft boss = new BossEnemy(Main.WINDOW_WIDTH / 2,
                 ImageManager.BOSS_ENEMY_IMAGE.getHeight(),
-                0, 0, 100);
+                5, 0, 300);
+        boss.setShootingType(new DiffuseShootingType());
         return boss;
     }
 }

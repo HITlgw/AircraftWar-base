@@ -1,0 +1,42 @@
+@startuml
+'https://plantuml.com/class-diagram
+
+Interface AbstractShootingType
+{
+    + doShoot(int AircraftType,int power,int shootnum,int LocationX,int LocationY):List<AbstractBullet>
+}
+abstract class AbstractAircraft
+{
+	# maxHp:int
+    # hp:int
+    # AbstractShootingType:shootingType
+    + AbstractAircraft(int locationX, int locationY, int speedX, int speedY, int hp)
+    + decreaseHp(int decrease):void
+    + getHp():int
+    + {abstract} shoot():List<AbstractBullet>
+    + setShootingType(AbstractShootingType shootingType):void
+ }
+
+class StraightShootingType
+{
+    + doShoot(int AircraftType,int power,int shootnum,int LocationX,int LocationY):List<AbstractBullet>
+}
+class DiffuseShootingType
+{
+    + doShoot(int AircraftType,int power,int shootnum,int LocationX,int LocationY):List<AbstractBullet>
+}
+class BulletSupply{
+    - int addBullet
+    + BulletSupply(int locationX, int locationY,
+     int speedX, int speedY)
+    + BulletSupply(int locationX, int locationY,
+          int speedX, int speedY, int addBullet)
+    + getSupply(HeroAircraft Hero):void
+}
+AbstractShootingType <|... DiffuseShootingType
+AbstractShootingType <|... StraightShootingType
+AbstractAircraft o-left-> AbstractShootingType
+BulletSupply --up-> AbstractAircraft
+BulletSupply ...> StraightShootingType
+BulletSupply ...> DiffuseShootingType
+@enduml

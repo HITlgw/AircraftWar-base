@@ -1,5 +1,6 @@
 package edu.hitsz.supply;
 
+import edu.hitsz.ShootingType.DiffuseShootingType;
 import edu.hitsz.aircraft.HeroAircraft;
 
 /**
@@ -26,6 +27,8 @@ public class BulletSupply extends AbstractSupply{
     @Override
     public void getSupply(HeroAircraft hero){
 //        hero.addBullet(addBullet);
+        hero.increaseShootNum();
+        hero.setShootingType(new DiffuseShootingType());
         System.out.println("FireSupply active!");
     }
 }

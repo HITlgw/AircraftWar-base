@@ -1,8 +1,10 @@
 package edu.hitsz.application;
 
-import edu.hitsz.Factory.BossEnemyFactory;
-import edu.hitsz.Factory.EliteEnemyFactory;
-import edu.hitsz.Factory.MobEnemyFactory;
+import edu.hitsz.Data.Dao;
+import edu.hitsz.Data.ScoreDao;
+import edu.hitsz.aircraftFactory.BossEnemyFactory;
+import edu.hitsz.aircraftFactory.EliteEnemyFactory;
+import edu.hitsz.aircraftFactory.MobEnemyFactory;
 import edu.hitsz.aircraft.*;
 import edu.hitsz.bullet.AbstractBullet;
 import edu.hitsz.basic.AbstractFlyingObject;
@@ -46,6 +48,7 @@ public class Game extends JPanel {
     private boolean gameOverFlag = false;
     private int score = 0;
     private int time = 0;
+    private int bossScoreThreshold = 200;
     /**
      * 周期（ms)
      * 指示子弹的发射、敌机的产生频率
@@ -116,7 +119,7 @@ public class Game extends JPanel {
                     }
                 }
                 //V4:增加boss敌机
-                if(this.score % 200>=180 && existBoss==false)
+                if(this.score % bossScoreThreshold>=bossScoreThreshold-20 && existBoss==false)
                 {
                     enemyAircrafts.add(new BossEnemyFactory().createEnemyAircraft());
                     existBoss=true;
@@ -149,6 +152,13 @@ public class Game extends JPanel {
                 executorService.shutdown();
                 gameOverFlag = true;
                 System.out.println("Game Over!");
+                Dao dao = new ScoreDao();
+                try {
+                    dao.writeOne("Player1",score);
+                    dao.printAll();
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
             }
 
         };

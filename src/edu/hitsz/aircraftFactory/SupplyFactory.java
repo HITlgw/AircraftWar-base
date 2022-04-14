@@ -1,4 +1,4 @@
-package edu.hitsz.Factory;
+package edu.hitsz.aircraftFactory;
 
 import edu.hitsz.supply.AbstractSupply;
 
