@@ -1,15 +1,18 @@
 package edu.hitsz.Data;
 
 import java.io.Serializable;
+import java.time.LocalDateTime;
 
 public class Player implements Comparable, Serializable {
     private int Score;
     private String Name;
+    private LocalDateTime localDateTime;
 
 
-    public Player(int score, String name) {
+    public Player(int score, String name,LocalDateTime localDateTime) {
         this.Score = score;
         this.Name = name;
+        this.localDateTime=localDateTime;
     }
 
 
@@ -25,6 +28,16 @@ public class Player implements Comparable, Serializable {
 
     @Override
     public String toString() {
-        return Name+"\t"+Score;
+        return Name+","+Score+","+
+                localDateTime.getMonthValue()+"-"+localDateTime.getDayOfMonth()+
+                " "+localDateTime.getHour()+":"+localDateTime.getMinute();
     }
+    public void printSelf(){
+        System.out.printf("%s,%4d,%02d-%02d %02d:%02d",Name,Score,localDateTime.getMonthValue(),localDateTime.getDayOfMonth(),localDateTime.getHour(),localDateTime.getMinute());
+    }
+
+//    public static void main(String[] args) {
+//        Player testplayer = new Player(111,"123123",LocalDateTime.now());
+//        testplayer.printSelf();
+//    }
 }

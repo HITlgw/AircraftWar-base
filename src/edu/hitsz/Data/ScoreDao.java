@@ -1,11 +1,7 @@
 package edu.hitsz.Data;
 
 import java.io.*;
-import java.nio.charset.StandardCharsets;
-import java.nio.file.Files;
-import java.nio.file.Path;
-import java.nio.file.Paths;
-import java.nio.file.StandardOpenOption;
+import java.time.LocalDateTime;
 import java.util.*;
 
 public class ScoreDao implements Dao {
@@ -39,8 +35,8 @@ public class ScoreDao implements Dao {
     }
 
     @Override
-    public void writeOne(String Name, int Score)  {
-        Player p = new Player(Score,Name);
+    public void writeOne(String Name, int Score, LocalDateTime localDateTime)  {
+        Player p = new Player(Score,Name,localDateTime);
         ArrayList<Player> L = new ArrayList<>();
         ArrayList<Player> addL=getAllData();
         if(addL!=null) { L.addAll(addL);}
@@ -51,12 +47,17 @@ public class ScoreDao implements Dao {
 
     @Override
     public void printAll() {
+        System.out.println("********************************");
+        System.out.println("            得分排行榜            ");
+        System.out.println("********************************");
 
         ArrayList<Player> L = getAllData();
         int i=1;
-        System.out.println("排名\t\t名字\t\t得分");
+        //System.out.println("排名\t\t名字\t\t得分\t\t时间");
         for (Player p :L) {
-            System.out.println("第" + i + "名\t" + p);
+            System.out.print("第" + i + "名\t");
+            p.printSelf();
+            System.out.print("\n");
             i++;
         }
     }
@@ -80,31 +81,8 @@ public class ScoreDao implements Dao {
         writeAllData(L);
     }
 
-
-    public static void main(String[] args) throws IOException {
-
-//        Files.createFile(Paths.get("src/Players.dat"));
-//        ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream("src/Players.dat"));
-//        oos.writeObject(new ArrayList<Player>());
-//        oos.close();
-//        ArrayList<Player> L = new ArrayList<>();
-//        ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream("src/Players.dat"));
-//        oos.writeObject(L);
-//        oos.close();
-
-        Dao dao = new ScoreDao();
-        dao.printAll();
-        dao.deleteOne(18);
-        System.out.println("*****");
-        dao.printAll();
-//        dao.writeScore("aaa",1);
-//        dao.printAll();
-//        System.out.println("***");
-//        dao.writeScore("bbb",3);
-//        dao.printAll();
-//        System.out.println("***");
-//        dao.writeScore("ccc",2);
-//        dao.printAll();
-
-    }
+//    public static void main(String[] args) throws IOException {
+//        Dao dao = new ScoreDao();
+//        dao.deleteAll();
+//    }
 }

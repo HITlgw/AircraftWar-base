@@ -14,6 +14,7 @@ import org.apache.commons.lang3.concurrent.BasicThreadFactory;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.image.BufferedImage;
+import java.time.LocalDateTime;
 import java.util.*;
 import java.util.List;
 import java.util.concurrent.*;
@@ -151,14 +152,15 @@ public class Game extends JPanel {
                 // 游戏结束
                 executorService.shutdown();
                 gameOverFlag = true;
-                System.out.println("Game Over!");
+
                 Dao dao = new ScoreDao();
                 try {
-                    dao.writeOne("Player1",score);
+                    dao.writeOne("Player1",score, LocalDateTime.now());
                     dao.printAll();
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
+                System.out.println("Game Over!");
             }
 
         };

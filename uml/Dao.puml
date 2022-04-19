@@ -4,7 +4,7 @@
 interface Dao {
     + getAllData():ArrayList<Player>
     + writeAllData(ArrayList<Player> L):void
-    + writeOne(String name, int score):void
+    + writeOne(String name, int score,LocalDateTime localDateTime):void
     + printAll():void
     + deleteAll():void
     + deleteOne(int rank):void
@@ -13,7 +13,7 @@ Dao <|... ScoreDao
 class ScoreDao{
     + getAllData():ArrayList<Player>
     + writeAllData(ArrayList<Player> L):void
-    + writeOne(String name, int score):void
+    + writeOne(String name, int score,LocalDateTime localDateTime):void
     + printAll():void
     + deleteAll():void
     + deleteOne(int rank):void
@@ -23,6 +23,7 @@ class Player
     - Name:String
     - Score:int
     + Player(String Name, int Score)
+    + printself():void
     + compareTo(Object o):int
     + toString():String
 
