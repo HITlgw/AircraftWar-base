@@ -22,6 +22,7 @@ class Player
 {
     - Name:String
     - Score:int
+    - localDateTime:LocalDateTime
     + Player(String Name, int Score)
     + printself():void
     + compareTo(Object o):int
