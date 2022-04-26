@@ -45,8 +45,8 @@ public class BossEnemy extends AbstractAircraft {
     @Override
     public List<AbstractSupply> generateSupply() {
         List<AbstractSupply> newSupplyList = new LinkedList<>();
-        newSupplyList.add(new HPSupplyFactory().createSupply(super.locationX+8,super.locationY,0,10));
-        newSupplyList.add(new BulletSupplyFactory().createSupply(super.locationX-8,super.locationY,0,10));
+        newSupplyList.add(new HPSupplyFactory().createSupply(super.locationX+80,super.locationY,0,10));
+        newSupplyList.add(new BulletSupplyFactory().createSupply(super.locationX-80,super.locationY,0,10));
         if(Math.random()>0.5)
         {
             newSupplyList.add(new BombSupplyFactory().createSupply(super.locationX,super.locationY+5,0,10));

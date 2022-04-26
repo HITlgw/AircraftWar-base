@@ -8,6 +8,9 @@ import edu.hitsz.aircraftFactory.MobEnemyFactory;
 import edu.hitsz.aircraft.*;
 import edu.hitsz.bullet.AbstractBullet;
 import edu.hitsz.basic.AbstractFlyingObject;
+import edu.hitsz.misic.BGMThread;
+import edu.hitsz.misic.BossBGMThread;
+import edu.hitsz.misic.otherMusicThread;
 import edu.hitsz.supply.AbstractSupply;
 import org.apache.commons.lang3.concurrent.BasicThreadFactory;
 
@@ -46,8 +49,8 @@ public class Game extends JPanel {
     private final List<AbstractSupply> abstractSupplies;
 
     private int enemyMaxNumber = 5;
-    private boolean gameOverFlag = false;
-    private int score = 0;
+    public static boolean gameOverFlag = false;
+    public static int score = 0;
     private int time = 0;
     private int bossScoreThreshold = 200;
     /**
@@ -57,7 +60,7 @@ public class Game extends JPanel {
     private int cycleDuration = 600;
     private int cycleTime = 0;
     //V4:增加变量记录是否存在boss敌机
-    private boolean existBoss = false;
+    public static boolean existBoss = false;
 
     public Game() {
 //        heroAircraft = new HeroAircraft(
@@ -124,6 +127,14 @@ public class Game extends JPanel {
                 {
                     enemyAircrafts.add(new BossEnemyFactory().createEnemyAircraft());
                     existBoss=true;
+                    Thread bossbgmthread = new Thread(()->{
+                        while(existBoss){
+                            Thread musicthread = new BossBGMThread("src/vedio/bgm_boss.wav");
+                            musicthread.run();
+                        }
+
+                    });
+                    bossbgmthread.start();
                 }
                 // 飞机射出子弹
                 shootAction();
@@ -152,15 +163,17 @@ public class Game extends JPanel {
                 // 游戏结束
                 executorService.shutdown();
                 gameOverFlag = true;
-
-                Dao dao = new ScoreDao();
+                System.out.println("Game Over!");
+                Thread gameoverthread = new otherMusicThread("src/vedio/game_over.wav");
+                gameoverthread.start();
                 try {
-                    dao.writeOne("Player1",score, LocalDateTime.now());
-                    dao.printAll();
-                } catch (Exception e) {
+                    gameoverthread.join();
+                } catch (InterruptedException e) {
                     e.printStackTrace();
                 }
-                System.out.println("Game Over!");
+                synchronized (Main.Lock){
+                    Main.Lock.notify();
+                }
             }
 
         };
@@ -317,6 +330,8 @@ public class Game extends JPanel {
             }
             if(supply.crash(heroAircraft))
             {
+                Thread getsupplythread = new otherMusicThread("src/vedio/get_supply.wav");
+                getsupplythread.start();
                 supply.getSupply(heroAircraft);
                 supply.vanish();
             }
@@ -401,6 +416,9 @@ public class Game extends JPanel {
         y = y + 20;
         g.drawString("LIFE:" + this.heroAircraft.getHp(), x, y);
     }
+
+
+
 
 
 

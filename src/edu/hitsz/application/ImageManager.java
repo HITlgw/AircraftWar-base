@@ -47,6 +47,8 @@ public class ImageManager {
         try {
 
             BACKGROUND_IMAGE = ImageIO.read(new FileInputStream("src/images/bg.jpg"));
+
+
             // V1: 增加精英敌机，Boss敌机，加血补给，子弹补给，炸弹补给// V1: 导入精英敌机，Boss敌机，加血补给，子弹补给，炸弹补给图片
             HERO_IMAGE = ImageIO.read(new FileInputStream("src/images/hero.png"));
             MOB_ENEMY_IMAGE = ImageIO.read(new FileInputStream("src/images/mob.png"));

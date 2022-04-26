@@ -1,6 +1,7 @@
 package edu.hitsz.supply;
 
 import edu.hitsz.aircraft.HeroAircraft;
+import edu.hitsz.misic.otherMusicThread;
 
 public class BombSupply extends AbstractSupply{
 
@@ -11,5 +12,7 @@ public class BombSupply extends AbstractSupply{
     @Override
     public void getSupply(HeroAircraft hero) {
         System.out.println("BombSupply active!");
+        Thread bumbthread = new otherMusicThread("src/vedio/bomb_explosion.wav");
+        bumbthread.start();
     }
 }

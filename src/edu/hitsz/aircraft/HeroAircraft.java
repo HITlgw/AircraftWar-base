@@ -35,6 +35,7 @@ public class HeroAircraft extends AbstractAircraft {
     private int direction = -1;
     //类的静态私有对象
     private static HeroAircraft hero;
+    public static final Object shootnum_Lock = new Object();
 
     /**
      * @param locationX 英雄机位置x坐标
@@ -132,7 +133,7 @@ public class HeroAircraft extends AbstractAircraft {
                     hero=new HeroAircraft(
                             Main.WINDOW_WIDTH / 2,
                             Main.WINDOW_HEIGHT - ImageManager.HERO_IMAGE.getHeight() ,
-                            0, 0, 500);//血量调成500
+                            0, 0, 5000);//血量调成500
                     //V4 初始时默认直射
                     hero.setShootingType(new StraightShootingType());
                 }
@@ -143,8 +144,13 @@ public class HeroAircraft extends AbstractAircraft {
     }
     public void increaseShootNum()
     {
-        this.shootNum++;
+        this.shootNum+=2;
     }
+    public void decreaseShootNum()
+    {
+        this.shootNum-=2;
+    }
+
 
 
 }

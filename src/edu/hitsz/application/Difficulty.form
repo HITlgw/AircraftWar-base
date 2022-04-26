@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<form xmlns="http://www.intellij.com/uidesigner/form/" version="1" bind-to-class="edu.hitsz.application.Difficulty">
+  <grid id="27dc6" binding="MainPanel" layout-manager="GridLayoutManager" row-count="2" column-count="1" same-size-horizontally="false" same-size-vertically="false" hgap="-1" vgap="-1">
+    <margin top="0" left="0" bottom="0" right="0"/>
+    <constraints>
+      <xy x="20" y="20" width="516" height="400"/>
+    </constraints>
+    <properties>
+      <background color="-2894893"/>
+      <enabled value="false"/>
+    </properties>
+    <border type="none"/>
+    <children>
+      <grid id="a346d" layout-manager="GridLayoutManager" row-count="3" column-count="1" same-size-horizontally="false" same-size-vertically="false" hgap="-1" vgap="-1">
+        <margin top="0" left="0" bottom="0" right="0"/>
+        <constraints>
+          <grid row="0" column="0" row-span="1" col-span="1" vsize-policy="3" hsize-policy="3" anchor="0" fill="3" indent="0" use-parent-layout="false">
+            <minimum-size width="512" height="568"/>
+            <preferred-size width="512" height="568"/>
+            <maximum-size width="512" height="568"/>
+          </grid>
+        </constraints>
+        <properties/>
+        <border type="none"/>
+        <children>
+          <component id="88104" class="javax.swing.JButton" binding="Button1">
+            <constraints>
+              <grid row="0" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false">
+                <minimum-size width="200" height="50"/>
+                <preferred-size width="200" height="50"/>
+                <maximum-size width="200" height="50"/>
+              </grid>
+            </constraints>
+            <properties>
+              <text value="简单"/>
+            </properties>
+          </component>
+          <component id="d3074" class="javax.swing.JButton" binding="Button3">
+            <constraints>
+              <grid row="2" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false">
+                <minimum-size width="200" height="50"/>
+                <preferred-size width="200" height="50"/>
+                <maximum-size width="200" height="50"/>
+              </grid>
+            </constraints>
+            <properties>
+              <text value="困难"/>
+            </properties>
+          </component>
+          <component id="db952" class="javax.swing.JButton" binding="Button2">
+            <constraints>
+              <grid row="1" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false">
+                <minimum-size width="200" height="50"/>
+                <preferred-size width="200" height="50"/>
+                <maximum-size width="200" height="50"/>
+              </grid>
+            </constraints>
+            <properties>
+              <text value="中等"/>
+            </properties>
+          </component>
+        </children>
+      </grid>
+      <grid id="d648a" layout-manager="GridLayoutManager" row-count="1" column-count="1" same-size-horizontally="false" same-size-vertically="false" hgap="-1" vgap="-1">
+        <margin top="0" left="0" bottom="0" right="0"/>
+        <constraints>
+          <grid row="1" column="0" row-span="1" col-span="1" vsize-policy="3" hsize-policy="3" anchor="0" fill="0" indent="0" use-parent-layout="false">
+            <minimum-size width="512" height="200"/>
+            <preferred-size width="512" height="200"/>
+            <maximum-size width="512" height="200"/>
+          </grid>
+        </constraints>
+        <properties>
+          <enabled value="true"/>
+        </properties>
+        <border type="none"/>
+        <children>
+          <component id="96c69" class="javax.swing.JRadioButton" binding="radioButton1" default-binding="true">
+            <constraints>
+              <grid row="0" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="0" indent="0" use-parent-layout="false">
+                <minimum-size width="200" height="50"/>
+                <preferred-size width="200" height="50"/>
+                <maximum-size width="200" height="50"/>
+              </grid>
+            </constraints>
+            <properties>
+              <horizontalAlignment value="0"/>
+              <horizontalTextPosition value="2"/>
+              <text value="声音"/>
+            </properties>
+          </component>
+        </children>
+      </grid>
+    </children>
+  </grid>
+</form>

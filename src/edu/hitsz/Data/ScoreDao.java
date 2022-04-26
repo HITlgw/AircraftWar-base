@@ -1,16 +1,31 @@
 package edu.hitsz.Data;
 
+import edu.hitsz.application.Main;
+
 import java.io.*;
 import java.time.LocalDateTime;
 import java.util.*;
 
 public class ScoreDao implements Dao {
+    private String filename;
+    public ScoreDao() {
+        if(Main.Difficulty==1){
+            this.filename="src/Players1.dat";
+        }
+        else if (Main.Difficulty==2){
+            this.filename="src/Players2.dat";
+        }
+        else{
+            this.filename="src/Players3.dat";
 
+        }
+
+    }
     @Override
     public ArrayList<Player> getAllData() {
+        ArrayList<Player> L;
         try {
-            ObjectInputStream ois = new ObjectInputStream(new FileInputStream("src/Players.dat"));
-            ArrayList<Player> L;
+            ObjectInputStream ois = new ObjectInputStream(new FileInputStream(filename));
             L = (ArrayList<Player>) ois.readObject();
             ois.close();
             return L;
@@ -25,7 +40,7 @@ public class ScoreDao implements Dao {
     public void  writeAllData(ArrayList<Player> L)
     {
         try {
-            ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream("src/Players.dat"));
+            ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream(filename));
             oos.writeObject(L);
             oos.close();
         } catch (IOException e) {
@@ -44,6 +59,8 @@ public class ScoreDao implements Dao {
         Collections.sort(L);
         writeAllData(L);
     }
+
+
 
     @Override
     public void printAll() {
@@ -81,8 +98,12 @@ public class ScoreDao implements Dao {
         writeAllData(L);
     }
 
-//    public static void main(String[] args) throws IOException {
+//    public static void main(String[] args) {
+//        Main.Difficulty=2;
+//
 //        Dao dao = new ScoreDao();
-//        dao.deleteAll();
+////        dao.deleteAll();
+//        dao.writeOne("test2",500, LocalDateTime.now());
+//        dao.printAll();
 //    }
 }

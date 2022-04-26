@@ -1,6 +1,7 @@
 package edu.hitsz.supply;
 
 import edu.hitsz.ShootingType.DiffuseShootingType;
+import edu.hitsz.ShootingType.StraightShootingType;
 import edu.hitsz.aircraft.HeroAircraft;
 
 /**
@@ -27,8 +28,19 @@ public class BulletSupply extends AbstractSupply{
     @Override
     public void getSupply(HeroAircraft hero){
 //        hero.addBullet(addBullet);
-        hero.increaseShootNum();
-        hero.setShootingType(new DiffuseShootingType());
-        System.out.println("FireSupply active!");
+        Thread thread = new Thread(()-> {
+            synchronized (HeroAircraft.shootnum_Lock) {     //加时序锁防止连续获得多个bullet道具产生问题
+                hero.increaseShootNum();
+                hero.setShootingType(new DiffuseShootingType());
+                try {
+                    Thread.sleep(3000);
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+                hero.decreaseShootNum();
+                hero.setShootingType(new StraightShootingType());
+            }
+        });
+        thread.start();
     }
 }

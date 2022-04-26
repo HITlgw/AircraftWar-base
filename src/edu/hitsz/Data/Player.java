@@ -8,8 +8,19 @@ public class Player implements Comparable, Serializable {
     private String Name;
     private LocalDateTime localDateTime;
 
+    public String getScore() {
+        return String.valueOf(Score);
+    }
 
-    public Player(int score, String name,LocalDateTime localDateTime) {
+    public String getName() {
+        return Name;
+    }
+
+    public String getLocalDateTime() {
+        return ""+localDateTime.getMonthValue()+"-"+localDateTime.getDayOfMonth()+"  "+localDateTime.getHour()+":"+localDateTime.getMinute();
+    }
+
+    public Player(int score, String name, LocalDateTime localDateTime) {
         this.Score = score;
         this.Name = name;
         this.localDateTime=localDateTime;
