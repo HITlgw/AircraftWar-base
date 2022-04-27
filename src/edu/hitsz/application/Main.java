@@ -1,5 +1,7 @@
 package edu.hitsz.application;
 
+import edu.hitsz.misic.BGMThread;
+
 import javax.swing.*;
 import java.awt.*;
 
@@ -12,8 +14,10 @@ public class Main {
     public static final int WINDOW_WIDTH = 512;
     public static final int WINDOW_HEIGHT = 768;
     public static final Object Lock = new Object();
-    public static boolean BGM=false;
+//    public static final Object BGM_Lock = new Object();
+    public static boolean BGM = true;
     public static int Difficulty=0;//1-简单 2-一般 3-困难
+
 
 
 
@@ -30,21 +34,27 @@ public class Main {
         frame.setBounds(((int) screenSize.getWidth() - WINDOW_WIDTH) / 2, 0,
                 WINDOW_WIDTH, WINDOW_HEIGHT);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        var difficultySelectPanel=new Difficulty().MainPanel;
 
-        frame.setContentPane(difficultySelectPanel);
+        Game game = new Game();
+
+
+        var difficultySelection=new Difficulty(game);
+        difficultySelection.addToFrame(frame);
         frame.setVisible(true);
+
         synchronized (Lock){
             try {
                 Lock.wait();
-            } catch (InterruptedException e) {
+            }
+            catch (InterruptedException e) {
                 e.printStackTrace();
             }
         }
-
+        Thread BGMThread=new BGMThread("src/vedio/bgm.wav",game);
+        BGMThread.start();
         frame.setVisible(false);
-        frame.remove(difficultySelectPanel);
-        Game game = new Game();
+        difficultySelection.removeFromFrame(frame);
+
         frame.setContentPane(game);
         frame.setVisible(true);
         game.action();
@@ -53,30 +63,30 @@ public class Main {
         synchronized (Lock){
             try {
                 Lock.wait();
-            } catch (InterruptedException e) {
+            }
+            catch (InterruptedException e) {
                 e.printStackTrace();
             }
         }
         frame.remove(game);
         frame.setVisible(false);
-        var nameInputPanel = new InputName().MainPanel;
-        frame.setContentPane(nameInputPanel);
+        var nameInput = new InputName(game);
+        nameInput.addToFrame(frame);
         frame.setVisible(true);
 
         //排行榜窗口
         synchronized (Lock){
             try {
                 Lock.wait();
-            } catch (InterruptedException e) {
+            }
+            catch (InterruptedException e) {
                 e.printStackTrace();
             }
         }
-        frame.remove(nameInputPanel);
+        nameInput.removeFromFrame(frame);
         frame.setVisible(false);
-        var scorePanel = new ScoreTable().MainPanel;
-        frame.setContentPane(scorePanel);
+        var scoreTable = new ScoreTable();
+        scoreTable.addToFrame(frame);
         frame.setVisible(true);
-
-
     }
 }

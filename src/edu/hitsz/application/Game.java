@@ -49,8 +49,17 @@ public class Game extends JPanel {
     private final List<AbstractSupply> abstractSupplies;
 
     private int enemyMaxNumber = 5;
-    public static boolean gameOverFlag = false;
-    public static int score = 0;
+    private boolean gameOverFlag = false;
+    private int score = 0;
+
+    public boolean isGameOver() {
+        return gameOverFlag;
+    }
+
+    public int getScore() {
+        return score;
+    }
+
     private int time = 0;
     private int bossScoreThreshold = 200;
     /**
@@ -60,7 +69,11 @@ public class Game extends JPanel {
     private int cycleDuration = 600;
     private int cycleTime = 0;
     //V4:增加变量记录是否存在boss敌机
-    public static boolean existBoss = false;
+    private boolean existBoss = false;
+
+    public boolean isExistBoss() {
+        return existBoss;
+    }
 
     public Game() {
 //        heroAircraft = new HeroAircraft(
@@ -129,7 +142,7 @@ public class Game extends JPanel {
                     existBoss=true;
                     Thread bossbgmthread = new Thread(()->{
                         while(existBoss){
-                            Thread musicthread = new BossBGMThread("src/vedio/bgm_boss.wav");
+                            Thread musicthread = new BossBGMThread("src/vedio/bgm_boss.wav",this);
                             musicthread.run();
                         }
 

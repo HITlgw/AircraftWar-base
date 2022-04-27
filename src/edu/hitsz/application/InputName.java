@@ -11,21 +11,23 @@ import java.time.LocalDateTime;
 public class InputName {
     private JPanel NamePanel;
     private JPanel ButtonPanel;
-    public JPanel MainPanel;
+    private JPanel MainPanel;
     private JTextField NametextField;
     private JLabel remindLabel;
     private JButton YesButton;
     private JButton NoButton;
     private JLabel YesorNoLabel;
+    private Game game;
 
-    public InputName() {
+    public InputName(Game game) {
+        this.game=game;
         YesButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 String name = NametextField.getText();
                 Dao dao = new ScoreDao();
                 try {
-                    dao.writeOne(name,Game.score, LocalDateTime.now());
+                    dao.writeOne(name, game.getScore(), LocalDateTime.now());
                     dao.printAll();
                 } catch (Exception err) {
                     err.printStackTrace();
@@ -45,5 +47,11 @@ public class InputName {
                 }
             }
         });
+    }
+    public void addToFrame(JFrame frame){
+        frame.setContentPane(this.MainPanel);
+    }
+    public void removeFromFrame(JFrame frame){
+        frame.remove(this.MainPanel);
     }
 }

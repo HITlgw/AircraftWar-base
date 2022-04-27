@@ -16,7 +16,7 @@ public class ScoreTable {
     private JTable scoreTable;
     private JScrollPane tableScrollPane;
     private JLabel tableTitleLabel;
-    public JPanel MainPanel;
+    private JPanel MainPanel;
     private JPanel topPanel;
     private JPanel ButtonPanel;
     private JLabel difficultyLabel;
@@ -67,11 +67,11 @@ public class ScoreTable {
         });
     }
 
-    public static void main(String[] args) {
-        JFrame frame = new JFrame("ScoreTable");
-        frame.setContentPane(new ScoreTable().MainPanel);
-        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        frame.pack();
-        frame.setVisible(true);
+    public void addToFrame(JFrame frame){
+        frame.setContentPane(this.MainPanel);
     }
+    public void removeFromFrame(JFrame frame){
+        frame.remove(this.MainPanel);
+    }
+
 }
