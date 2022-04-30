@@ -2,6 +2,7 @@ package edu.hitsz.aircraft;
 
 import edu.hitsz.application.Game;
 import edu.hitsz.application.Main;
+import edu.hitsz.basic.Observer;
 import edu.hitsz.bullet.AbstractBullet;
 import edu.hitsz.supply.AbstractSupply;
 
@@ -14,7 +15,7 @@ import java.util.List;
  *
  * @author hitsz
  */
-public class MobEnemy extends AbstractAircraft {
+public class MobEnemy extends AbstractAircraft implements Observer {
 
     public MobEnemy(int locationX, int locationY, int speedX, int speedY, int hp) {
         super(locationX, locationY, speedX, speedY, hp);
@@ -40,4 +41,8 @@ public class MobEnemy extends AbstractAircraft {
         return null;
     }
 
+    @Override
+    public void update() {
+        this.vanish();
+    }
 }

@@ -1,0 +1,46 @@
+@startuml
+'https://plantuml.com/class-diagram
+class BombSupply{
+    - ArrayList<Observer> observers;
+    + BombSupply(int locationX, int locationY,
+     int speedX, int speedY)
+    + getSupply(HeroAircraft Hero):void
+    + addObserver(Observer):void
+    + delletObserver(Observer):void
+    + NotifyAllObservers():void
+}
+class game{}
+Interface Observer{
+    + Update()
+}
+
+class MobEnemy {
+    + MobEnemy(int locationX, int locationY, int speedX, int speedY, int hp)
+    + forward():void
+    + shoot():List<AbstractBullet>
+    + Update()
+}
+
+class EliteEnemy {
+    - power:int
+    - direction:int
+    + EliteEnemy(int locationX, int locationY, int speedX, int speedY, int hp)
+    + forward():void
+    + shoot():List<AbstractBullet>
+    + Update()
+}
+
+class EnemyBullet {
+    + EnemyBullet(int locationX, int locationY,
+     int speedX, int speedY, int power)
+     + Update()
+}
+game -right-> BombSupply
+game .down.> MobEnemy
+game .down.> EliteEnemy
+game .down.> EnemyBullet
+MobEnemy .up..|> Observer
+EliteEnemy .up..|> Observer
+EnemyBullet ..up.|> Observer
+BombSupply o---> Observer
+@enduml

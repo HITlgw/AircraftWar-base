@@ -70,23 +70,26 @@ public class Main {
         }
         frame.remove(game);
         frame.setVisible(false);
-        var nameInput = new InputName(game);
-        nameInput.addToFrame(frame);
-        frame.setVisible(true);
-
-        //排行榜窗口
-        synchronized (Lock){
-            try {
-                Lock.wait();
-            }
-            catch (InterruptedException e) {
-                e.printStackTrace();
-            }
-        }
-        nameInput.removeFromFrame(frame);
-        frame.setVisible(false);
-        var scoreTable = new ScoreTable();
+//        var nameInput = new InputName(game);
+//        nameInput.addToFrame(frame);
+//        frame.setVisible(true);
+//        synchronized (Lock){
+//            try {
+//                Lock.wait();
+//            }
+//            catch (InterruptedException e) {
+//                e.printStackTrace();
+//            }
+//        }
+//        nameInput.removeFromFrame(frame);
+//        frame.setVisible(false);
+        var scoreTable = new ScoreTable(game,frame);
         scoreTable.addToFrame(frame);
         frame.setVisible(true);
+        scoreTable.addInputNamePanel(frame);
+
+
+        //排行榜窗口
+
     }
 }

@@ -7,7 +7,9 @@ import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.time.LocalDateTime;
-
+/****************
+ *     已弃用    *
+ ***************/
 public class InputName {
     private JPanel NamePanel;
     private JPanel ButtonPanel;
@@ -17,10 +19,12 @@ public class InputName {
     private JButton YesButton;
     private JButton NoButton;
     private JLabel YesorNoLabel;
+    private JLabel scoreLabel;
     private Game game;
 
     public InputName(Game game) {
         this.game=game;
+        scoreLabel.setText("本次得分为"+game.getScore());
         YesButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -48,10 +52,10 @@ public class InputName {
             }
         });
     }
-    public void addToFrame(JFrame frame){
-        frame.setContentPane(this.MainPanel);
+    public void addToPanel(JPanel panel){
+        panel.add(this.MainPanel);
     }
-    public void removeFromFrame(JFrame frame){
-        frame.remove(this.MainPanel);
+    public void removeFromPanel(JPanel panel){
+        panel.remove(this.MainPanel);
     }
 }

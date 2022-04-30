@@ -1,23 +1,21 @@
 package edu.hitsz.application;
 
-import edu.hitsz.Data.Dao;
-import edu.hitsz.Data.ScoreDao;
 import edu.hitsz.aircraftFactory.BossEnemyFactory;
 import edu.hitsz.aircraftFactory.EliteEnemyFactory;
 import edu.hitsz.aircraftFactory.MobEnemyFactory;
 import edu.hitsz.aircraft.*;
+import edu.hitsz.basic.Observer;
 import edu.hitsz.bullet.AbstractBullet;
 import edu.hitsz.basic.AbstractFlyingObject;
-import edu.hitsz.misic.BGMThread;
 import edu.hitsz.misic.BossBGMThread;
 import edu.hitsz.misic.otherMusicThread;
 import edu.hitsz.supply.AbstractSupply;
+import edu.hitsz.supply.BombSupply;
 import org.apache.commons.lang3.concurrent.BasicThreadFactory;
 
 import javax.swing.*;
 import java.awt.*;
 import java.awt.image.BufferedImage;
-import java.time.LocalDateTime;
 import java.util.*;
 import java.util.List;
 import java.util.concurrent.*;
@@ -48,7 +46,7 @@ public class Game extends JPanel {
     private final List<AbstractBullet> enemyBullets;
     private final List<AbstractSupply> abstractSupplies;
 
-    private int enemyMaxNumber = 5;
+    private int enemyMaxNumber = 10;
     private boolean gameOverFlag = false;
     private int score = 0;
 
@@ -70,6 +68,7 @@ public class Game extends JPanel {
     private int cycleTime = 0;
     //V4:增加变量记录是否存在boss敌机
     private boolean existBoss = false;
+    private ArrayList<BombSupply> bombPublishers;
 
     public boolean isExistBoss() {
         return existBoss;
@@ -87,6 +86,7 @@ public class Game extends JPanel {
         enemyBullets = new LinkedList<>();
         // V1:新增supply列表
         abstractSupplies = new LinkedList<>() ;
+        bombPublishers = new ArrayList<>();
 
 
         /**
@@ -116,23 +116,21 @@ public class Game extends JPanel {
             if (timeCountAndNewCycleJudge()) {
                 System.out.println(time);
                 // 新敌机产生
-                // V1:优先产生精英敌机(理解错误)
-//                if(enemyAircrafts.size() < enemyMaxNumber+1 && time%6000==1200){
-//                    enemyAircrafts.add(new EliteEnemy(
-//                            (int) ( Math.random() * (Main.WINDOW_WIDTH - ImageManager.MOB_ENEMY_IMAGE.getWidth()))*1,
-//                            (int) (Math.random() * Main.WINDOW_HEIGHT * 0.2)*1,
-//                            0,
-//                            10,
-//                            30
-//                    ));
-//                }
                 //V2:使用工厂重构，隐藏创建敌机细节
                 if (enemyAircrafts.size() < enemyMaxNumber) {
                     if(Math.random()>0.2){
-                        enemyAircrafts.add(new MobEnemyFactory().createEnemyAircraft());
+                        AbstractAircraft enemy = new MobEnemyFactory().createEnemyAircraft();
+                        enemyAircrafts.add(enemy);
+                        for(BombSupply b : bombPublishers){
+                            b.addObserver((Observer) enemy);
+                        }
                     }
                     else{
-                        enemyAircrafts.add(new EliteEnemyFactory().createEnemyAircraft());
+                        AbstractAircraft enemy = new EliteEnemyFactory().createEnemyAircraft();
+                        enemyAircrafts.add(enemy);
+                        for(BombSupply b : bombPublishers){
+                            b.addObserver((Observer) enemy);
+                        }
                     }
                 }
                 //V4:增加boss敌机
@@ -222,6 +220,12 @@ public class Game extends JPanel {
             if(newlist!=null)
             {
                 enemyBullets.addAll(newlist);
+                for (BombSupply b:bombPublishers){
+                    for (AbstractBullet bullet : newlist)
+                    {
+                        b.addObserver((Observer) bullet);
+                    }
+                }
             }
         }
         // 英雄射击
@@ -268,6 +272,9 @@ public class Game extends JPanel {
             {
                 heroAircraft.decreaseHp(bullet.getPower());
                 bullet.vanish();
+                for (BombSupply b:bombPublishers){
+                    b.deleteObserver((Observer)bullet);
+                }
             }
         }
         // 英雄子弹攻击敌机
@@ -288,41 +295,35 @@ public class Game extends JPanel {
                     bullet.vanish();
                     if (enemyAircraft.notValid()) {
                         // TODO 获得分数，产生道具补给
-                        // V1:精英敌机消失时产生道具，可修改道具掉落概率
-//                        if(enemyAircraft instanceof EliteEnemy)
-//                        {
-//                            int x = enemyAircraft.getLocationX();
-//                            int y = enemyAircraft.getLocationY();
-//                            //产生道具概率
-//                            if(Math.random()>=0)
-//                            {
-//                                //V2:使用Supply工厂方法
-//                                double typenum = Math.random();
-//                                if(typenum<0.4){
-//                                    AbstractSupply hpSupply = new HPSupply(x,y,0,10);
-//                                    abstractSupplies.add(hpSupply);
-//                                }
-//                                else if(typenum<0.8){
-//                                    AbstractSupply bulletSupply = new BulletSupply(x,y,0,10);
-//                                    abstractSupplies.add(bulletSupply);
-//                                }
-//                                else{
-//                                    AbstractSupply bombSupply = new BombSupply(x,y,0,10);
-//                                    abstractSupplies.add(bombSupply);
-//                                }
-//                            }
-//
-//
-//
-//                        }
                         //V2:使用敌机自身的generateSupply方法创建道具
                         List<AbstractSupply> newsupplyList=enemyAircraft.generateSupply();
-                        if(newsupplyList!=null){abstractSupplies.addAll(enemyAircraft.generateSupply());}
+                        if(newsupplyList!=null){
+                            for(AbstractSupply s : newsupplyList){
+                                abstractSupplies.add(s);
+                                if(s instanceof BombSupply){
+                                    for (AbstractBullet enemyBullet:enemyBullets){
+                                        if(!enemyBullet.notValid()){
+                                            ((BombSupply) s).addObserver((Observer)enemyBullet);
+                                        }
+                                    }
+                                    for (AbstractAircraft aircraft:enemyAircrafts){
+                                        if(!aircraft.notValid() && !(aircraft instanceof BossEnemy)){
+                                            ((BombSupply) s).addObserver((Observer)aircraft);
+                                        }
+                                    }
+                                    bombPublishers.add((BombSupply) s);
+                                }
+                            }
+                        }
+
                         score += 10;
                         //V3:boss机消失时需要重置existBoss
-                        if(enemyAircraft instanceof BossEnemy)
-                        {
+                        if(enemyAircraft instanceof BossEnemy) {
                             existBoss=false;
+                        }else{
+                            for (BombSupply b:bombPublishers){
+                                b.deleteObserver((Observer) enemyAircraft);
+                            }
                         }
                     }
                 }
@@ -366,6 +367,7 @@ public class Game extends JPanel {
         enemyAircrafts.removeIf(AbstractFlyingObject::notValid);
         // V1:删除失效的补给
         abstractSupplies.removeIf(AbstractFlyingObject::notValid);
+
     }
 
 

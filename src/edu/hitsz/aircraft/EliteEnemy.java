@@ -8,13 +8,14 @@ import edu.hitsz.aircraftFactory.BombSupplyFactory;
 import edu.hitsz.aircraftFactory.BulletSupplyFactory;
 import edu.hitsz.aircraftFactory.HPSupplyFactory;
 import edu.hitsz.application.Main;
+import edu.hitsz.basic.Observer;
 import edu.hitsz.bullet.AbstractBullet;
 import edu.hitsz.supply.AbstractSupply;
 
 import java.util.LinkedList;
 import java.util.List;
 
-public class EliteEnemy extends AbstractAircraft{
+public class EliteEnemy extends AbstractAircraft implements Observer {
     private int power = 30;
 //    private int direction = 1;
     private int shootNum = 1;
@@ -61,5 +62,10 @@ public class EliteEnemy extends AbstractAircraft{
             newSupplyList.add(new BombSupplyFactory().createSupply(locationX,locationY,0,10));
         }
         return newSupplyList;
+    }
+
+    @Override
+    public void update() {
+        this.vanish();
     }
 }
