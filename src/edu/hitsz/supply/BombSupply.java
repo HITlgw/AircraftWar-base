@@ -20,7 +20,7 @@ public class BombSupply extends AbstractSupply{
     public void getSupply(HeroAircraft hero) {
         System.out.println("BombSupply active!");
         notifyAllObservers();
-        Thread bumbthread = new otherMusicThread("src/vedio/bomb_explosion.wav");
+        Thread bumbthread = new otherMusicThread("src/video/bomb_explosion.wav");
         bumbthread.start();
     }
 

@@ -31,7 +31,7 @@ class EliteEnemyTest {
     @DisplayName("elite shoot test")
     @ValueSource(ints = {1,3,5})
     void shoot(int time) {
-        EliteEnemy elite = (EliteEnemy) new EliteEnemyFactory().createEnemyAircraft();
+        EliteEnemy elite = (EliteEnemy) new EliteEnemyFactory(10,5,30,30).createEnemyAircraft();
         List<AbstractBullet> bulletList = new ArrayList<>();
         for(int i=0;i<time;i++)                                             //射击time次
         {
@@ -50,7 +50,7 @@ class EliteEnemyTest {
     @DisplayName("elite generate supply test")
     @ValueSource(ints={1,2,3})
     void generateSupply(int time) {
-        EliteEnemy elite = (EliteEnemy) new EliteEnemyFactory().createEnemyAircraft();
+        EliteEnemy elite = (EliteEnemy) new EliteEnemyFactory(10,5,30,30).createEnemyAircraft();
         List<AbstractSupply> supplyList = elite.generateSupply();
         assertNotNull(supplyList);
         AbstractSupply supply = supplyList.get(0);

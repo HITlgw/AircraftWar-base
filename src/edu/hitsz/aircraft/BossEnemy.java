@@ -16,13 +16,16 @@ import java.util.List;
 
 public class BossEnemy extends AbstractAircraft {
     private int shootNum = 3;
+
+
+
     private int power = 50;
     private int direction = 1;
 
-    public BossEnemy(int locationX, int locationY, int speedX, int speedY, int hp) {
+    public BossEnemy(int locationX, int locationY, int speedX, int speedY, int hp,int power) {
         super(locationX, locationY, speedX, speedY, hp);
+        this.power=power;
     }
-
     @Override
     public List<AbstractBullet> shoot() {
         return this.shootingType.doShoot(1,power,shootNum,this.getLocationX(),this.getLocationY());

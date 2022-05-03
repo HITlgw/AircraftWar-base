@@ -5,6 +5,8 @@ import edu.hitsz.misic.BGMThread;
 import javax.swing.*;
 import java.awt.*;
 
+import static java.lang.System.exit;
+
 /**
  * 程序入口
  * @author hitsz
@@ -35,10 +37,10 @@ public class Main {
                 WINDOW_WIDTH, WINDOW_HEIGHT);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
-        Game game = new Game();
 
 
-        var difficultySelection=new Difficulty(game);
+
+        var difficultySelection=new Difficulty();
         difficultySelection.addToFrame(frame);
         frame.setVisible(true);
 
@@ -50,7 +52,19 @@ public class Main {
                 e.printStackTrace();
             }
         }
-        Thread BGMThread=new BGMThread("src/vedio/bgm.wav",game);
+        Game game = null;
+        if(Difficulty==1){
+            game=new EasyGame();
+        }else if(Difficulty==2){
+            game=new OrdinaryGame();
+        }else if(Difficulty==3){
+            game=new DifficultGame();
+        }else{
+            System.out.println("Warning!No Selection!");
+            exit(1);
+        }
+
+        Thread BGMThread=new BGMThread("src/video/bgm.wav",game);
         BGMThread.start();
         frame.setVisible(false);
         difficultySelection.removeFromFrame(frame);

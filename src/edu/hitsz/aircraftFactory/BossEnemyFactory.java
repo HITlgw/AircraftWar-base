@@ -6,12 +6,21 @@ import edu.hitsz.aircraft.BossEnemy;
 import edu.hitsz.application.ImageManager;
 import edu.hitsz.application.Main;
 
-public class BossEnemyFactory implements EnemyAircraftFactory {
+public class BossEnemyFactory extends EnemyAircraftFactory {
+
+    public BossEnemyFactory(int defaultSpeedX,int defaultHp,int defaultPower) {
+        super.defaultSpeedX = defaultSpeedX;
+        super.defaultHp=defaultHp;
+        super.defaultSpeedY=0;
+        super.defaultPower=defaultPower;
+    }
+
+//原设定power=50，speedx=10
     @Override
     public AbstractAircraft createEnemyAircraft() {
         AbstractAircraft boss = new BossEnemy(Main.WINDOW_WIDTH / 2,
                 ImageManager.BOSS_ENEMY_IMAGE.getHeight()/2,
-                5, 0, 300);
+                defaultSpeedX, defaultSpeedY, defaultHp,defaultPower);
         boss.setShootingType(new DiffuseShootingType());
         return boss;
     }

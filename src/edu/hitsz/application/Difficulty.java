@@ -15,7 +15,7 @@ public class Difficulty {
     private JButton Button3;
     private JButton Button2;
     private JRadioButton radioButton1;
-    private Game game;
+//    private Game game;
 
     public void addToFrame(JFrame frame){
         frame.setContentPane(this.MainPanel);
@@ -24,8 +24,7 @@ public class Difficulty {
         frame.remove(this.MainPanel);
     }
 
-    public Difficulty(Game game) {
-        this.game=game;
+    public Difficulty() {
         Button1.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
