@@ -38,8 +38,6 @@ public abstract class Game extends JPanel {
      * 时间间隔(ms)，控制刷新频率
      */
     private int timeInterval = 40;
-    //调试时改变的刷新频率
-    //private int timeInterval = 600;
     private final HeroAircraft heroAircraft;
     private final List<AbstractAircraft> enemyAircrafts;
     private final List<AbstractBullet> heroBullets;
@@ -64,28 +62,12 @@ public abstract class Game extends JPanel {
     protected EliteEnemyFactory eliteEnemyFactory;
     protected MobEnemyFactory mobEnemyFactory;
 
-    public void setBossEnemyFactory(BossEnemyFactory bossEnemyFactory) {
-        this.bossEnemyFactory = bossEnemyFactory;
-    }
-
-    public void setEliteEnemyFactory(EliteEnemyFactory eliteEnemyFactory) {
-        this.eliteEnemyFactory = eliteEnemyFactory;
-    }
-
-    public void setMobEnemyFactory(MobEnemyFactory mobEnemyFactory) {
-        this.mobEnemyFactory = mobEnemyFactory;
-    }
-
     public boolean isExistBoss() {
         return existBoss;
     }
 
     public Game() {
-//        heroAircraft = new HeroAircraft(
-//                Main.WINDOW_WIDTH / 2,
-//                Main.WINDOW_HEIGHT - ImageManager.HERO_IMAGE.getHeight() ,
-//                0, 0, 100);
-    //V2:单例模式修改
+        //V2:单例模式修改
         heroAircraft=HeroAircraft.getinstance();
         enemyAircrafts = new LinkedList<>();
         heroBullets = new LinkedList<>();
@@ -158,7 +140,9 @@ public abstract class Game extends JPanel {
             // 每隔10s增加难度
             if(time%10000==9800){
                 increaseDifficulty();
-            }
+                System.out.printf("难度增加");
+                printDifficulty();
+                }
 
         };
 
@@ -480,6 +464,14 @@ public abstract class Game extends JPanel {
     }
     public int getScore() {
         return score;
+    }
+    private void printDifficulty(){
+        System.out.printf("精英敌机产生概率=%.2f，每个周期产生敌机数=%d，最大敌机数=%d，\n",this.eliteRate,this.enemyEachTime,this.enemyMaxNumber);
+        System.out.printf("普通敌机血量=%d，速度Y=%d\n",mobEnemyFactory.getDefaultHp(),mobEnemyFactory.getDefaultSpeedY());
+        System.out.printf("精英敌机血量=%d，速度Y=%d，速度X=%d，攻击力=%d\n",
+                eliteEnemyFactory.getDefaultHp(),eliteEnemyFactory.getDefaultSpeedY(),eliteEnemyFactory.getDefaultSpeedX(),eliteEnemyFactory.getDefaultPower());
+        System.out.printf("Boss敌机血量=%d，速度Y=%d，速度X=%d，攻击力=%d\n",
+                bossEnemyFactory.getDefaultHp(),bossEnemyFactory.getDefaultSpeedY(),bossEnemyFactory.getDefaultSpeedX(),bossEnemyFactory.getDefaultPower());
     }
 
 

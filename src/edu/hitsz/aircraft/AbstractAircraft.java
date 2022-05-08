@@ -1,6 +1,7 @@
 package edu.hitsz.aircraft;
 
 import edu.hitsz.ShootingType.AbstractShootingType;
+import edu.hitsz.application.Main;
 import edu.hitsz.bullet.AbstractBullet;
 import edu.hitsz.basic.AbstractFlyingObject;
 import edu.hitsz.supply.AbstractSupply;
@@ -53,6 +54,13 @@ public abstract class AbstractAircraft extends AbstractFlyingObject {
     public void setShootingType(AbstractShootingType shootingType)
     {
         this.shootingType=shootingType;
+    }
+    @Override
+    public void forward(){
+        super.forward();
+        if (locationY >= Main.WINDOW_HEIGHT ) {
+            vanish();
+        }
     }
 
 }

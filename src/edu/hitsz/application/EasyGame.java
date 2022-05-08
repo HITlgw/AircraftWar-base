@@ -6,12 +6,11 @@ import edu.hitsz.aircraftFactory.MobEnemyFactory;
 
 public class EasyGame extends Game{
     @Override
-    protected void setFactroy() {
-        super.setMobEnemyFactory(new MobEnemyFactory(10,30));
-        super.setEliteEnemyFactory(new EliteEnemyFactory(10,5,30,30));
-        super.setBossEnemyFactory(new BossEnemyFactory(10,300,50));
+    public void setFactroy() {
+        super.mobEnemyFactory=new MobEnemyFactory(10,30);
+        super.eliteEnemyFactory=new EliteEnemyFactory(10,8,30,30);
+        super.bossEnemyFactory=new BossEnemyFactory(10,300,50);
     }
-
     @Override
     protected boolean isGenerateBoss() {
         return false;

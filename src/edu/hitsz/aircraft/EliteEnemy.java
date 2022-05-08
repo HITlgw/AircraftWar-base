@@ -52,10 +52,13 @@ public class EliteEnemy extends AbstractAircraft implements Observer {
     public List<AbstractSupply> generateSupply() {
         double typenum = Math.random();
         List<AbstractSupply> newSupplyList = new LinkedList<>();
-        if(typenum<0.4){
+        if(typenum<0.2){
+            //不产生道具
+        }
+        else if(typenum<0.6){
             newSupplyList.add(new HPSupplyFactory().createSupply(locationX,locationY,0,10));
         }
-        else if(typenum<0.8){
+        else if(typenum<0.9){
             newSupplyList.add(new BulletSupplyFactory().createSupply(locationX,locationY,0,10));
         }
         else{

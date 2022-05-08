@@ -81,6 +81,7 @@ public abstract class AbstractFlyingObject {
             // 横向超出边界后反向
             speedX = -speedX;
         }
+
     }
 
     /**

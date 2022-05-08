@@ -5,8 +5,8 @@ class BombSupply{
     + BombSupply(int locationX, int locationY,
      int speedX, int speedY)
     + getSupply(HeroAircraft Hero):void
-    + addObserver(Observer):void
-    + delletObserver(Observer):void
+    + addObserver(Observer o):void
+    + delletObserver(Observer o):void
     + NotifyAllObservers():void
 }
 class game{}

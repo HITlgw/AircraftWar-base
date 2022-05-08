@@ -7,11 +7,9 @@ import edu.hitsz.aircraftFactory.MobEnemyFactory;
 public class OrdinaryGame extends Game{
     @Override
     public void setFactroy() {
-        super.setMobEnemyFactory(new MobEnemyFactory(15,50));
-        super.setEliteEnemyFactory(new EliteEnemyFactory(12,8,40,45));
-//        super.setMobEnemyFactory(new MobEnemyFactory(2,600));
-//        super.setEliteEnemyFactory(new EliteEnemyFactory(15,1,50,600));
-        super.setBossEnemyFactory(new BossEnemyFactory(12,400,70));
+        super.mobEnemyFactory=new MobEnemyFactory(12,50);
+        super.eliteEnemyFactory=new EliteEnemyFactory(12,10,40,45);
+        super.bossEnemyFactory=new BossEnemyFactory(12,400,70);
     }
 
     @Override
@@ -28,6 +26,7 @@ public class OrdinaryGame extends Game{
     protected void increaseDifficulty() {
         super.mobEnemyFactory.increaseDifficulty(5,0,1,0);
         super.eliteEnemyFactory.increaseDifficulty(5,0,1,5);
+        super.eliteRate+=0.01;
     }
 
     @Override

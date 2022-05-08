@@ -1,16 +1,71 @@
 @startuml
 'https://plantuml.com/class-diagram
 abstract class Game{
+    - timeInterval:int
+    - heroAircraft:HeroAircraft
+    - enemyAircrafts:List<AbstractAircraft>
+    - heroBullets:List<AbstractBullet>
+    - enemyBullets:List<AbstractBullet>
+    - abstractSupplies:List<AbstractSupply>
+    # enemyMaxNumber:int
+    # eliteRate:double
+    # bossScore:int
+    # enemyEachTime:int
+    - gameOverFlag:boolean
+    - score:int
+    - time:int
+    - cycleDuration:int
+    - cycleTime:int
+    - existBoss:boolean
+    - bombPublishers:ArrayList<BombSupply>
+    # bossEnemyFactory:BossEnemyFactory
+    # eliteEnemyFactory:EliteEnemyFactory
+    # mobEnemyFactory:MobEnemyFactory
+    + Game()
     + action():void
-    + {abstract} setFactroy():void
+    + isExistBoss():void
+    # {abstract} setFactroy():void
+    # {abstract} isGenerateBoss():boolean
+    # {abstract} isIncreaseBossDifficuly():boolean
+    # {abstract} increaseDifficulty():void
+    # {abstract} setMaxEnemy():void
+    # {abstract} setEliteRate():void
+    # {abstract} setBossScore():void
+    # {abstract} setEnemyEachTime():void
 }
 class EasyGame{
+    # setFactroy():void
+    # isGenerateBoss():boolean
+    # isIncreaseBossDifficuly():boolean
+    # increaseDifficulty():void
+    # setMaxEnemy():void
+    # setEliteRate():void
+    # setBossScore():void
+    # setEnemyEachTime():void
 
 }
 class OrdinaryGame{
-
+    # setFactroy():void
+    # isGenerateBoss():boolean
+    # isIncreaseBossDifficuly():boolean
+    # increaseDifficulty():void
+    # setMaxEnemy():void
+    # setEliteRate():void
+    # setBossScore():void
+    # setEnemyEachTime():void
 }
 class DifficultGame{
-
+    # setFactroy():void
+    # isGenerateBoss():boolean
+    # isIncreaseBossDifficuly():boolean
+    # increaseDifficulty():void
+    # setMaxEnemy():void
+    # setEliteRate():void
+    # setBossScore():void
+    # setEnemyEachTime():void
 }
+
+EasyGame-up--|>Game
+OrdinaryGame-up--|>Game
+DifficultGame-up--|>Game
 @enduml

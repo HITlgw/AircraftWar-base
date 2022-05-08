@@ -2,7 +2,7 @@
 'https://plantuml.com/class-diagram
 
 
-Interface EnemyAircraftFactory{
+Abstract class EnemyAircraftFactory{
     + createEnemyAircraft():AbstractAircraft
 }
 EnemyAircraftFactory..left.>AbstractAircraft
@@ -29,9 +29,9 @@ class EliteAircraftFactory{
 class BossAircraftFactory{
     + createEnemyAircraft():AbstractAircraft
 }
-EnemyAircraftFactory <|... MobAircraftFactory
-EnemyAircraftFactory <|... EliteAircraftFactory
-EnemyAircraftFactory <|... BossAircraftFactory
+EnemyAircraftFactory <|--- MobAircraftFactory
+EnemyAircraftFactory <|--- EliteAircraftFactory
+EnemyAircraftFactory <|--- BossAircraftFactory
 
 MobAircraftFactory ...> MobEnemy
 EliteAircraftFactory ...> EliteEnemy

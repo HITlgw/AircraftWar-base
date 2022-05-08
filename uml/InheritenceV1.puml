@@ -50,9 +50,9 @@ abstract class AbstractSupply
     + forward():void
 }
 
-AbstractFlyingObject <|-- AbstractAircraft
-AbstractFlyingObject <|-- AbstractBullet
-AbstractFlyingObject <|-- AbstractSupply
+AbstractFlyingObject <|--down- AbstractAircraft
+AbstractFlyingObject <|--down- AbstractBullet
+AbstractFlyingObject <|--down- AbstractSupply
 
 AbstractAircraft <|-- HeroAircraft
 AbstractAircraft <|-- MobEnemy
