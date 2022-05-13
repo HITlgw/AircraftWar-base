@@ -131,8 +131,10 @@ public class HeroAircraft extends AbstractAircraft {
                 if(hero==null)
                 {
                     hero=new HeroAircraft(
-                            Main.WINDOW_WIDTH / 2,
-                            Main.WINDOW_HEIGHT - ImageManager.HERO_IMAGE.getHeight() ,
+//                            Main.WINDOW_WIDTH / 2,
+//                            Main.WINDOW_HEIGHT - ImageManager.HERO_IMAGE.getHeight() ,
+                            ImageManager.HERO_IMAGE.getWidth(),
+                            Main.WINDOW_HEIGHT/2,
                             0, 0, 5000);//血量调成500
                     //V4 初始时默认直射
                     hero.setShootingType(new StraightShootingType());

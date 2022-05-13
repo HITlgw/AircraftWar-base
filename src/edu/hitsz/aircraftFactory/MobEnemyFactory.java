@@ -16,8 +16,10 @@ public class MobEnemyFactory extends EnemyAircraftFactory {
     @Override
     public AbstractAircraft createEnemyAircraft() {
         return new MobEnemy(
-                (int) ( Math.random() * (Main.WINDOW_WIDTH - ImageManager.MOB_ENEMY_IMAGE.getWidth()))*1,
-                (int) (Math.random() * Main.WINDOW_HEIGHT * 0.2)*1,
+//                (int) ( Math.random() * (Main.WINDOW_WIDTH - ImageManager.MOB_ENEMY_IMAGE.getWidth()))*1,
+//                (int) (Math.random() * Main.WINDOW_HEIGHT * 0.2)*1,
+                (int) (Main.WINDOW_WIDTH - Math.random() * Main.WINDOW_WIDTH * 0.2),
+                (int) (Math.random()*(Main.WINDOW_HEIGHT- ImageManager.MOB_ENEMY_IMAGE.getHeight())),
                 defaultSpeedX,
                 defaultSpeedY,
                 defaultHp

@@ -27,9 +27,9 @@ public class EliteEnemyFactory extends EnemyAircraftFactory {
 //                defaultHp
 //        );
         AbstractAircraft elite = new EliteEnemy(
-                (int) ( Math.random() * (Main.WINDOW_WIDTH - ImageManager.ELITE_ENEMY_IMAGE.getWidth()))*1,
-                (int) (Math.random() * Main.WINDOW_HEIGHT * 0.2)*1,
-                (int)(defaultSpeedX*(Math.random()-0.5)),
+                (int) (Main.WINDOW_WIDTH - Math.random() * Main.WINDOW_WIDTH * 0.2),
+                (int) (Math.random()*(Main.WINDOW_HEIGHT- ImageManager.ELITE_ENEMY_IMAGE.getHeight())),
+                (int) (defaultSpeedX*(Math.random()-0.5)),
                 defaultSpeedY,
                 defaultHp
         );

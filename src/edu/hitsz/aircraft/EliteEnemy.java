@@ -42,7 +42,7 @@ public class EliteEnemy extends AbstractAircraft implements Observer {
     public void forward() {
         super.forward();
         // 判定 y 轴向下飞行出界
-        if (locationY >= Main.WINDOW_HEIGHT ) {
+        if (locationX >= Main.WINDOW_HEIGHT || locationX <= 0) {
             vanish();
         }
     }

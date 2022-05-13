@@ -453,11 +453,17 @@ public abstract class Game extends JPanel {
     private void paintScoreAndLife(Graphics g) {
         int x = 10;
         int y = 25;
-        g.setColor(new Color(16711680));
-        g.setFont(new Font("SansSerif", Font.BOLD, 22));
-        g.drawString("SCORE:" + this.score, x, y);
-        y = y + 20;
-        g.drawString("LIFE:" + this.heroAircraft.getHp(), x, y);
+        Graphics2D g2d = (Graphics2D)g;
+
+        g2d.setColor(new Color(16711680));
+
+        g2d.setFont(new Font("SansSerif", Font.BOLD, 20));
+        g2d.translate(this.getWidth() * 9 / 10, this.getHeight() / 15);
+        g2d.rotate(90 * Math.PI / 180);
+//        g2d.setPaint(Color.black);
+        g2d.drawString("SCORE:" + this.score,0,0);
+        g2d.drawString("LIFE:" + this.heroAircraft.getHp(), 0, 20);
+
     }
     public boolean isGameOver() {
         return gameOverFlag;

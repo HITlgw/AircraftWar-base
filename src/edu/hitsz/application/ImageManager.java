@@ -50,15 +50,15 @@ public class ImageManager {
 
 
             // V1: 增加精英敌机，Boss敌机，加血补给，子弹补给，炸弹补给// V1: 导入精英敌机，Boss敌机，加血补给，子弹补给，炸弹补给图片
-            HERO_IMAGE = ImageIO.read(new FileInputStream("src/images/hero.png"));
-            MOB_ENEMY_IMAGE = ImageIO.read(new FileInputStream("src/images/mob.png"));
-            ELITE_ENEMY_IMAGE = ImageIO.read(new FileInputStream("src/images/elite.png"));
-            BOSS_ENEMY_IMAGE = ImageIO.read(new FileInputStream("src/images/boss.png"));
-            HERO_BULLET_IMAGE = ImageIO.read(new FileInputStream("src/images/bullet_hero.png"));
-            ENEMY_BULLET_IMAGE = ImageIO.read(new FileInputStream("src/images/bullet_enemy.png"));
-            HP_SUPPLY_IMAGE = ImageIO.read(new FileInputStream("src/images/prop_blood.png"));
-            BULLET_SUPPLY_IMAGE = ImageIO.read(new FileInputStream("src/images/prop_bullet.png"));
-            BOMB_SUPPLY_IMAGE = ImageIO.read(new FileInputStream("src/images/prop_bomb.png"));
+            HERO_IMAGE = ImageIO.read(new FileInputStream("src/images/hero_r.png"));
+            MOB_ENEMY_IMAGE = ImageIO.read(new FileInputStream("src/images/mob_r.png"));
+            ELITE_ENEMY_IMAGE = ImageIO.read(new FileInputStream("src/images/elite_r.png"));
+            BOSS_ENEMY_IMAGE = ImageIO.read(new FileInputStream("src/images/boss_r.png"));
+            HERO_BULLET_IMAGE = ImageIO.read(new FileInputStream("src/images/bullet_hero_r.png"));
+            ENEMY_BULLET_IMAGE = ImageIO.read(new FileInputStream("src/images/bullet_enemy_r.png"));
+            HP_SUPPLY_IMAGE = ImageIO.read(new FileInputStream("src/images/prop_blood_r.png"));
+            BULLET_SUPPLY_IMAGE = ImageIO.read(new FileInputStream("src/images/prop_bullet_r.png"));
+            BOMB_SUPPLY_IMAGE = ImageIO.read(new FileInputStream("src/images/prop_bomb_r.png"));
             // V1: 在MAP中增加精英敌机，Boss敌机，加血补给，子弹补给，炸弹补给的类和图片关联
             CLASSNAME_IMAGE_MAP.put(HeroAircraft.class.getName(), HERO_IMAGE);
             CLASSNAME_IMAGE_MAP.put(MobEnemy.class.getName(), MOB_ENEMY_IMAGE);

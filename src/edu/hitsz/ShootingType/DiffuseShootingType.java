@@ -14,22 +14,23 @@ public class DiffuseShootingType implements AbstractShootingType{
     @Override
     public List<AbstractBullet> doShoot(int AircraftType,int power,int shootNum,int LocationX,int LocationY) {
         List<AbstractBullet> list = new LinkedList<>();
-        int[] bullets_locationX = new int[shootNum];
+        int[] bullets_locationY = new int[shootNum];
         int[] bullets_speedx = new int[shootNum];
         //利用数组记录每一个子弹的x速度和x坐标
         for(int i=0;i<shootNum;i++) {
-            bullets_locationX[i] = LocationX-(shootNum-1)*5+i*10;
+
+            bullets_locationY[i] = LocationY-(shootNum-1)*5+i*10;
             bullets_speedx[i] = i*2-(shootNum-1)*1;
         }
         //根据不同的飞机类型建立不同的子弹
         if(AircraftType==1){
             for(int i=0;i<shootNum;i++) {
-                list.add(new EnemyBullet(bullets_locationX[i],LocationY,bullets_speedx[i],5,power));
+                list.add(new EnemyBullet(LocationX,bullets_locationY[i],bullets_speedx[i],5,power));
             }
         }
         else if(AircraftType==-1){
             for(int i=0;i<shootNum;i++) {
-                list.add(new HeroBullet(bullets_locationX[i],LocationY,bullets_speedx[i],-10,power));
+                list.add(new HeroBullet(LocationX,bullets_locationY[i],bullets_speedx[i],-10,power));
             }
         }
         return list;

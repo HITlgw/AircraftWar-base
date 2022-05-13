@@ -17,7 +17,7 @@ public abstract class AbstractSupply extends AbstractFlyingObject {
     public void forward() {
         super.forward();
         // 判定 y 轴向下飞行出界
-        if (locationY >= Main.WINDOW_HEIGHT ) {
+        if (locationX <= 0 || locationX >= Main.WINDOW_WIDTH) {
             vanish();
         }
     }
